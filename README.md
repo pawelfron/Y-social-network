@@ -1,2 +1,2 @@
 # Y-social-network
-Twitter/X clone
+Twitter/X Clone
