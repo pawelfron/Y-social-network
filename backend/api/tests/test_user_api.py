@@ -180,4 +180,4 @@ class UserAPITests(APITestCase):
         
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.user1.refresh_from_db()
-        self.assertTrue(self.user1.profile_photo) 
+        self.assertTrue(self.user1.profile_photo)
