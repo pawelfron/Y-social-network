@@ -1,5 +1,6 @@
 import React from 'react'
 import UserCard from './UserCard'
+import './UserList.css'
 
 const UserList = () => {
   const users = [
@@ -9,11 +10,12 @@ const UserList = () => {
   ]
     
   return (
-    <>
+    <div className='ListWrapper'>
       {users.map(user => (
         <UserCard key={user.nickname} {...user} />
       ))}
-    </>
+      <button className='showMoreButton'>Show more...</button>
+    </div>
   );
   
 }

@@ -1,0 +1,30 @@
+.ListWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.showMoreButton {
+    background-color: transparent;
+    color: #1da1f2; 
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 25px; 
+    text-transform: uppercase; 
+  }
+  
+  .showMoreButton:hover {
+    background-color: rgba(29, 161, 242, 0.1); 
+    color: #1a91d0; 
+  }
+  
+  .showMoreButton:focus {
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.5); 
+  }
+

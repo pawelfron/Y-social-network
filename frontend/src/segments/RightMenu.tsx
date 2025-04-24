@@ -1,14 +1,13 @@
-import React, { Fragment } from 'react'
-import SearchBar from '../components/SearchBar'
-import UserList from '../components/UserList'
+import SearchBar from '../components/search_bar/SearchBar'
+import UserList from '../components/user_list/UserList'
 
 const RightMenu = () => {
 
   return (
-    <Fragment>
+    <div className='flex items-center flex-col bg-black'>
         <SearchBar></SearchBar>
         <UserList></UserList>
-    </Fragment>
+    </div>
   )
 }
 

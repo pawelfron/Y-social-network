@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react'
+import './UserCard.css'
+import defaultProfile from '../../assets/default-avatar.jpg'
 
 interface Props {
     name: string;
@@ -8,10 +10,11 @@ interface Props {
 
 const UserCard = (props: Props) => {
 
+
   return (
-    <div>
-        <img src="" alt="" />
-        <div>
+    <div className='cardWrapper'>
+        <img src={props.profileFoto || defaultProfile} alt="" />
+        <div className='namesWrapper'>
             <div>{props.name}</div>
             <div>{'@' + props.nickname}</div>
         </div>
