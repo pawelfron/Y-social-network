@@ -1,0 +1,33 @@
+.appContainer {
+    display: flex;
+    justify-content: center; /* Wyśrodkowanie całości */
+    max-width: 1400px;
+    margin: 0 auto; /* Środek strony */
+  }
+  
+  .leftSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* menu góra, user dół */
+    width: 20%;
+    min-width: 300px;
+    height: 100vh;
+    border-right: 1px solid #505050;
+    position: sticky;
+    top: 0;
+    padding: 10px;
+  }
+  
+  .mainContent {
+    width: 40%;
+    padding: 20px;
+    border-right: 1px solid #505050;
+  }
+  
+  .rightMenu {
+    width: 30%;
+    min-width: 250px;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+  }

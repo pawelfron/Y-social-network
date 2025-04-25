@@ -1,7 +1,7 @@
 import { Home, Search, Bell, Bookmark, User, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./LeftBar.css";
-import logo from "../assets/Ylogo.jpg";
+import logo from "../../assets/Ylogo.jpg";
 
 function LeftBar() {
   const addPost = () => {

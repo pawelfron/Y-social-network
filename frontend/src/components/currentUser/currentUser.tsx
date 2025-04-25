@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./currentUser.css";
-import logo from "../assets/Ylogo.jpg";
+import logo from "../../assets/Ylogo.jpg";
 
 function CurrentUser() {
   const [menuVisible, setMenuVisible] = useState(false);

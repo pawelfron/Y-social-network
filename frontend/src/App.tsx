@@ -1,17 +1,26 @@
 import { useState } from "react";
-import LeftBar from "./components/leftBar";
+import LeftBar from "./components/leftBar/leftBar";
+import CurrentUser from "./components/currentUser/currentUser";
+import RightMenu from "./segments/RightMenu";
 import "./index.css";
-import CurrentUser from "./components/currentUser";
-import './App.css'
-import RightMenu from './segments/RightMenu'
-
+import "./App.css";
+import MainContent from "./segments/MainContent";
 
 function App() {
   return (
-    <>
-      <LeftBar />
-      <CurrentUser />
-      <RightMenu></RightMenu>
-    </>
+    <div className="appContainer">
+      <div className="leftSection">
+        <LeftBar />
+        <CurrentUser />
+      </div>
+      <div className="mainContent">
+        <MainContent/>
+      </div>
+      <div className="rightMenu">
+        <RightMenu />
+      </div>
+    </div>
   );
 }
+
+export default App;
