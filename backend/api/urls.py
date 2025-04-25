@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView
-from .views import auth_views, user_views
+from .views import auth_views, user_views, post_views
 
 urlpatterns = [
     # Authentication endpoints
@@ -17,6 +17,10 @@ urlpatterns = [
     path('users/<int:user_id>/following', user_views.UserFollowingView.as_view(), name='user_following'),
     path('users/<int:user_id>/follow', user_views.FollowUserView.as_view(), name='follow_user'),
     path('users/<int:user_id>/unfollow', user_views.UnfollowUserView.as_view(), name='unfollow_user'),
+    
+    # Post endpoints
+    path('posts', post_views.PostListCreateView.as_view(), name='post_list_create'),
+    path('posts/<int:postId>', post_views.PostDetailEditDeleteView.as_view(), name='post_detail_edit_delete'),
 
     # This is only for testing if authentication works; delete later
     path('useless', auth_views.UselessView.as_view(), name='test_protected_endpoint'),

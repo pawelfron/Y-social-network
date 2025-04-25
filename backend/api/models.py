@@ -26,3 +26,13 @@ class Follow(models.Model):
     def __str__(self):
         return f"{self.follower.username} follows {self.followed.username}"
 
+
+class Post(models.Model):
+    content = models.TextField(max_length=500, blank=True)
+    image = models.ImageField(upload_to="posts/", null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE ,related_name="author")
+
+    def __str__(self):
+        return f"Post by {self.author.username} at {self.created_at}"
+    
