@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import LeftBar from "./components/leftBar/leftBar";
+import CurrentUser from "./components/currentUser/currentUser";
+import RightMenu from "./segments/RightMenu";
+import MainContent from "./segments/MainContent";
+import Login from "./components/pages/Login";    // <--- add this
+import Register from "./components/pages/Register";  // <--- add this
+import "./index.css";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Routes>
+      {/* Login Page */}
+      <Route path="/" element={<Login />} />
+
+      {/* Register Page */}
+      <Route path="/register" element={<Register />} />
+
+      {/* Home Page */}
+      <Route path="/home" element={
+        <div className="appContainer">
+          <div className="leftSection">
+            <LeftBar />
+            <CurrentUser />
+          </div>
+          <div className="mainContent">
+            <MainContent />
+          </div>
+          <div className="rightMenu">
+            <RightMenu />
+          </div>
+        </div>
+      } />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
