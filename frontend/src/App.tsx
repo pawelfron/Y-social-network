@@ -3,8 +3,8 @@ import LeftBar from "./components/leftBar/leftBar";
 import CurrentUser from "./components/currentUser/currentUser";
 import RightMenu from "./segments/RightMenu";
 import MainContent from "./segments/MainContent";
-import Login from "./components/pages/Login";    // <--- add this
-import Register from "./components/pages/Register";  // <--- add this
+import Login from "./components/pages/Login";    
+import Register from "./components/pages/Register"; 
 import "./index.css";
 import "./App.css";
 
