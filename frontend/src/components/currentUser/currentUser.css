@@ -1,0 +1,77 @@
+.user-profile {
+  background-color: black; /* Kolor tła */
+  color: white; /* Kolor tekstu */
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; /* Umożliwia pozycjonowanie elementów wewnętrznych */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 16px;
+}
+
+.user-avatar {
+  width: 48px; /* Szerokość zdjęcia */
+  height: 48px; /* Wysokość zdjęcia */
+  border-radius: 50%; /* Okrągłe zdjęcie */
+  margin-right: 12px; /* Odstęp między zdjęciem a tekstem */
+}
+
+.user-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.user-username {
+  font-size: 14px;
+  color: #ccc; /* Kolor tekstu dla nazwy użytkownika */
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white; /* Kolor przycisku */
+  font-size: 32px;
+  text-decoration: underline;
+  transition: color 0.2s ease-in-out;
+  text-decoration: none; /* Usunięcie podkreślenia */
+  margin-right: 16px; /* Odstęp od prawej krawędzi */
+}
+
+.logout-btn:hover {
+  color: #2563eb; /* Kolor przycisku po hover */
+}
+
+.dropdown-menu {
+  position: absolute;
+  bottom: 60%;
+  right: 0;
+  background-color: #2d2d2d;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+  width: 150px;
+}
+
+.dropdown-item {
+  background: none;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none; /* Usunięcie podkreślenia */
+}
+
+.dropdown-item:hover {
+  background-color: #333;
+}

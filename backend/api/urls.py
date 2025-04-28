@@ -17,10 +17,6 @@ urlpatterns = [
     path('users/<int:user_id>/following', user_views.UserFollowingView.as_view(), name='user_following'),
     path('users/<int:user_id>/follow', user_views.FollowUserView.as_view(), name='follow_user'),
     path('users/<int:user_id>/unfollow', user_views.UnfollowUserView.as_view(), name='unfollow_user'),
-    
-    # Post endpoints
-    path('posts', post_views.PostListCreateView.as_view(), name='post_list_create'),
-    path('posts/<int:postId>', post_views.PostDetailEditDeleteView.as_view(), name='post_detail_edit_delete'),
 
     # Comment endpoints
     path('posts/<int:post_id>/comments', comment_views.CommentListView.as_view(), name='comment_list'),
