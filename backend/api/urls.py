@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView
-from .views import auth_views, user_views, post_views
+from .views import auth_views, user_views, post_views, comment_views
 
 urlpatterns = [
     # Authentication endpoints
@@ -21,6 +21,14 @@ urlpatterns = [
     # Post endpoints
     path('posts', post_views.PostListCreateView.as_view(), name='post_list_create'),
     path('posts/<int:postId>', post_views.PostDetailEditDeleteView.as_view(), name='post_detail_edit_delete'),
+
+    # Comment endpoints
+    path('posts/<int:post_id>/comments', comment_views.CommentListView.as_view(), name='comment_list'),
+    path('comments', comment_views.CommentCreateView.as_view(), name='comment_create'),
+    path('comments/<int:comment_id>', comment_views.CommentDetailView.as_view(), name='comment_detail'),
+    path('comments/<int:comment_id>/edit', comment_views.CommentUpdateView.as_view(), name='comment_update'),
+    path('comments/<int:comment_id>/delete', comment_views.CommentDeleteView.as_view(), name='comment_delete'),
+    path('comments/<int:comment_id>/replies', comment_views.CommentRepliesView.as_view(), name='comment_replies'),
 
     # This is only for testing if authentication works; delete later
     path('useless', auth_views.UselessView.as_view(), name='test_protected_endpoint'),
