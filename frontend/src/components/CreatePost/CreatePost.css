@@ -1,0 +1,57 @@
+.createPostWrapper {
+  background-color: black;
+  padding: 15px;
+  border-bottom: 1px solid #2f3336;
+  color: white;
+}
+
+.inputSection {
+  display: flex;
+  gap: 10px;
+}
+
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.inputSection textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  resize: none;
+  outline: none;
+}
+
+.createPostActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.icons {
+  display: flex;
+  gap: 12px;
+  color: #1da1f2;
+}
+
+.postButton {
+  background-color: #1da1f2;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.postButton:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

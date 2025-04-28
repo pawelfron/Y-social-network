@@ -1,0 +1,11 @@
+.mainContentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .postsFeed {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
