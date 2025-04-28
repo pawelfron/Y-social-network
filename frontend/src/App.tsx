@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import { useState } from "react";
 import LeftBar from "./components/leftBar/leftBar";
 import CurrentUser from "./components/currentUser/currentUser";
@@ -5,6 +6,7 @@ import RightMenu from "./segments/RightMenu";
 import "./index.css";
 import "./App.css";
 import MainContent from "./segments/MainContent";
+import Notifications from './segments/Notifications';
 
 function App() {
   return (
@@ -14,7 +16,10 @@ function App() {
         <CurrentUser />
       </div>
       <div className="mainContent">
-        <MainContent/>
+        <Routes>
+          <Route path="/" element={<MainContent />} />
+          <Route path="/notifications" element={<Notifications />} />
+        </Routes>
       </div>
       <div className="rightMenu">
         <RightMenu />
