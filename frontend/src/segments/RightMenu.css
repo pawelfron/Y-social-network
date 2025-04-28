@@ -1,0 +1,10 @@
+.rightMenuWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px 20px;
+  background-color: black;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}

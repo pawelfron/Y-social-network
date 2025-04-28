@@ -26,7 +26,6 @@ class Follow(models.Model):
     def __str__(self):
         return f"{self.follower.username} follows {self.followed.username}"
 
-
 class Post(models.Model):
     content = models.TextField(max_length=500, blank=True)
     image = models.ImageField(upload_to="posts/", null=True, blank=True)
@@ -57,4 +56,3 @@ class Comment(models.Model):
     @property
     def reply_count(self):
         return self.replies.count()
-    

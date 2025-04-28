@@ -1,0 +1,108 @@
+/* Ogólne style */
+.profile-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  background-color: black; /* Ciemne tło */
+  color: white; /* Jasny kolor tekstu */
+}
+
+/* Nagłówek profilu */
+.profile-header {
+  position: relative;
+  width: 100%;
+}
+
+.profile-background {
+  width: 100%;
+  object-fit: cover;
+}
+
+.profile-details {
+  display: flex;
+  padding: 20px;
+  position: absolute;
+  top: 160px; /* Przesunięcie detali w dół */
+  left: 20px;
+  right: 20px;
+  background-color: #1a1a1a; /* Ciemne tło dla detali */
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Cień */
+}
+
+.profile-picture {
+  margin-right: 20px;
+}
+
+.profile-avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #121212; /* Obwódka wokół zdjęcia */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Cień wokół zdjęcia */
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-name {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+  color: #1da1f2; /* Kolor nazwiska (twitter blue) */
+}
+
+.profile-username {
+  font-size: 18px;
+  color: #657786;
+  margin: 5px 0;
+}
+
+.profile-bio {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #aab8c2; /* Kolor tekstu bio */
+}
+
+.profile-additional-info,
+.profile-birthdate,
+.profile-join-date {
+  font-size: 14px;
+  color: #657786;
+  margin: 5px 0;
+}
+
+.profile-follow {
+  margin-top: 15px;
+}
+
+.profile-following,
+.profile-followers {
+  font-size: 14px;
+  color: #657786;
+  margin-right: 15px;
+}
+
+/* Przyciski */
+.follow-button {
+  background-color: #1da1f2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.follow-button:hover {
+  background-color: #0d95e8; /* Zmiana koloru na hover */
+}
+
+.follow-button:focus {
+  outline: none;
+}
