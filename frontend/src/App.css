@@ -1,41 +1,42 @@
-.appContainer {
-  display: flex;
-  justify-content: center; /* Wyśrodkowanie całości */
-  max-width: 1400px;
-  margin: 0 auto; /* Środek strony */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
 }
 
-.mainLayout {
-  display: flex; /* To ustawia sekcje obok siebie */
-  width: 100%; /* Zajmuje całą szerokość kontenera */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-.leftSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* menu góra, user dół */
-  width: 20%;
-  min-width: 300px;
-  height: 100vh;
-  border-right: 1px solid #505050;
-  position: sticky;
-  top: 0;
-  padding: 10px;
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.mainContent {
-  width: 40%;
-  height: 100vh; /* Ustawiamy wysokość na 100vh, aby miała wysokość okna */
-  padding: 20px;
-  border-right: 1px solid #505050;
-  overflow-y: auto; /* Umożliwia przewijanie tylko tej sekcji */
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
 }
 
-.rightMenu {
-  width: 30%;
-  height: 100vh; /* Ustawiamy wysokość na 100vh, aby miała wysokość okna */
-  min-width: 250px;
-  padding: 20px;
-  position: sticky;
-  top: 0;
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
 }
