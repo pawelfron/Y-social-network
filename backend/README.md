@@ -65,7 +65,7 @@ python manage.py runserver
 
 ## Running the Tests
 
-The project contains tests for authentication and user-related features. To run the tests:
+The project contains tests for authentication, user-related features, and comments. To run the tests:
 
 1. Make sure your virtual environment is activated.
 
@@ -83,18 +83,21 @@ python manage.py test api.tests.test_auth
 
 # Run only user API tests
 python manage.py test api.tests.test_user_api
+
+# Run only comment API tests
+python manage.py test api.tests.test_comment_api
 ```
 
 4. Run a specific test class:
 
 ```bash
-python manage.py test api.tests.test_user_api.UserAPITests
+python manage.py test api.tests.test_comment_api.CommentAPITests
 ```
 
 5. Run a specific test method:
 
 ```bash
-python manage.py test api.tests.test_user_api.UserAPITests.test_get_user_profile
+python manage.py test api.tests.test_comment_api.CommentAPITests.test_create_comment
 ```
 
 ## Available API Endpoints
@@ -115,3 +118,20 @@ python manage.py test api.tests.test_user_api.UserAPITests.test_get_user_profile
 - `GET /users/{user_id}/following` - Get a list of users that a user is following
 - `POST /users/{user_id}/follow` - Follow a user
 - `DELETE /users/{user_id}/unfollow` - Unfollow a user
+
+### Posts
+
+- `GET /posts` - Get all posts
+- `POST /posts` - Create a new post
+- `GET /posts/{postId}` - Get details of a specific post
+- `PUT /posts/{postId}` - Update a post
+- `DELETE /posts/{postId}` - Delete a post
+
+### Comments
+
+- `GET /posts/{post_id}/comments` - Get all top-level comments for a post (not including replies)
+- `POST /comments` - Create a new comment or reply (include `parent` field to create a reply)
+- `GET /comments/{comment_id}` - Get details of a specific comment, including its replies
+- `PUT /comments/{comment_id}/edit` - Update a comment
+- `DELETE /comments/{comment_id}/delete` - Delete a comment
+- `GET /comments/{comment_id}/replies` - Get all replies to a specific comment
