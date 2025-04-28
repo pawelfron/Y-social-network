@@ -147,9 +147,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Custom User model
 AUTH_USER_MODEL = 'api.User'
 
+# Temporarily disable authentication for testing
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',  # Allow any access (temporarily for testing)
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
