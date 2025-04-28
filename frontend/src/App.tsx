@@ -10,6 +10,8 @@ import Notifications from './segments/Notifications';
 import Profile from './components/ui/Profile/Profile';
 import Login from './components/ui/pages/Login';
 import Register from './components/ui/pages/Register';
+import Explore from './segments/Explore';
+import Bookmarks from './segments/Bookmarks';
 
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
               <Route path="/" element={<MainContent />} />
               <Route path="/notifications" element={<Notifications />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/explore" element={<Explore />} />
+              <Route path='/bookmarks' element={<Bookmarks/>} />
               {/* Możliwość wylogowania
               <Route path="/logout" element={<button onClick={handleLogout}>Logout</button>} /> */}
             </Routes>
