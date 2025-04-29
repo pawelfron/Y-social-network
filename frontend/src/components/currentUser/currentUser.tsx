@@ -42,7 +42,7 @@ function CurrentUser() {
       </button>
 
       {menuVisible && (
-        <div className="dropdown-menu">
+        <div className="dropdown-menu-user">
           <button onClick={() => alert("Logged out")} className="dropdown-item">
             Log out
           </button>

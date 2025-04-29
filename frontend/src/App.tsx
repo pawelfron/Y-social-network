@@ -13,15 +13,10 @@ import Register from "./components/ui/pages/Register";
 import Explore from "./segments/Explore";
 import Bookmarks from "./segments/Bookmarks";
 import Settings from "./segments/Settings";
-import RightSettings from "./components/RightSettings/RightSettings";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const location = useLocation();
 
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-
-  // Funkcja do obsługi logowania
   const handleLogin = () => setIsAuthenticated(true);
 
   return (
