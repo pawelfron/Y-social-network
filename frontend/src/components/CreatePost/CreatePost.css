@@ -1,22 +1,29 @@
-.createPostWrapper {
+.createPostContainer {
   background-color: black;
   padding: 15px;
   border-bottom: 1px solid #2f3336;
   color: white;
 }
 
+.createPostWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .inputSection {
   display: flex;
   gap: 10px;
+  cursor: text;
 }
 
 .userAvatar {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
-.inputSection textarea {
+textarea {
   flex: 1;
   background: transparent;
   border: none;
@@ -26,32 +33,158 @@
   outline: none;
 }
 
+.collapsedTextarea {
+  background: transparent;
+  border: none;
+}
+
+.expandedTextarea {
+  background-color: #16181c;
+  padding: 10px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+/* Reply setting */
+.replySettingWrapper {
+  margin-top: 8px;
+  margin-left: 54px;
+  position: relative;
+}
+
+.replyButton {
+  background: transparent;
+  border: none;
+  color: #1da1f2;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+/* Reply options */
+.replyOptions {
+  position: absolute;
+  top: 30px;
+  background: #16181c;
+  border: 1px solid #2f3336;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 200;
+  width: 250px;
+}
+
+.optionItem {
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.optionItem:hover {
+  background: #2f3336;
+}
+
+/* Post action area */
 .createPostActions {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .icons {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   color: #1da1f2;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.icons > *:hover {
+  color: #1a8cd8;
 }
 
 .postButton {
   background-color: #1da1f2;
   border: none;
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 8px 18px;
+  border-radius: 9999px;
   color: white;
-  cursor: pointer;
   font-weight: bold;
-  opacity: 1;
-  transition: opacity 0.3s ease;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.postButton:hover {
+  background-color: #1a8cd8;
 }
 
 .postButton:disabled {
   opacity: 0.5;
-  cursor: default;
+  cursor: not-allowed;
 }
+
+/* Image preview */
+.imagePreviewGrid {
+  display: grid;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.imagePreviewGrid.count-1 {
+  grid-template-columns: 1fr;
+}
+
+.imagePreviewGrid.count-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.imagePreviewGrid.count-3 {
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.imagePreviewGrid.count-3 .previewItem:first-child {
+  grid-row: span 2;
+}
+
+.imagePreviewGrid.count-4 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.previewItem {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.previewItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.removePreview {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Emoji picker */
+.emojiPickerContainer {
+  margin-top: 10px;
+  margin-left: 54px;
+  z-index: 999;
+  position: relative;
+}
+
