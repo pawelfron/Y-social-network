@@ -40,6 +40,12 @@ class CommentAPITests(APITestCase):
             content="This is a reply",
             parent=self.comment1
         )
+
+        # Login
+        url = reverse('token_obtain_pair')
+        resp = self.client.post(url, {'username': 'testuser', 'password': 'password123'})
+        self.token = resp.data['access']
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.token}')
     
     def test_get_comments_for_post(self):
         """Test retrieving comments for a specific post"""
