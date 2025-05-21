@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions, status
+from rest_framework import generics, permissions, status, exceptions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
@@ -44,7 +44,7 @@ class CommentUpdateView(generics.UpdateAPIView):
     def perform_update(self, serializer):
         comment = self.get_object()
         if comment.author != self.request.user:
-            raise permissions.PermissionDenied("You can only update your own comments")
+            raise exceptions.PermissionDenied("You can only update your own comments")
         serializer.save()
 
 class CommentDeleteView(generics.DestroyAPIView):
@@ -55,7 +55,7 @@ class CommentDeleteView(generics.DestroyAPIView):
     
     def perform_destroy(self, instance):
         if instance.author != self.request.user:
-            raise permissions.PermissionDenied("You can only delete your own comments")
+            raise exceptions.PermissionDenied("You can only delete your own comments")
         instance.delete()
 
 class CommentRepliesView(generics.ListAPIView):
