@@ -38,7 +38,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'content', 'image', 'created_at', 'author', 'is_own_post']
+        fields = ['id', 'content', 'image', 'created_at', 'author', 'is_own_post', 'likes']
     
     def get_is_own_post(self, obj):
         request = self.context.get('request')
@@ -51,6 +51,6 @@ class PostListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'content', 'image', 'created_at', 'author']
+        fields = ['id', 'content', 'image', 'created_at', 'author', 'likes']
 
 
