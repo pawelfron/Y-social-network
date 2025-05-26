@@ -92,3 +92,60 @@ class PostAPITests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertTrue(Post.objects.filter(id=self.post2.id).exists())
+
+    def test_liking_own_post(self):
+        url = reverse('post_likes', kwargs={'postId': self.post1.id})
+        response = self.client.post(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(self.post1.likes.filter(id=self.user1.id).exists())
+
+    def test_liking_others_post(self):
+        url = reverse('post_likes', kwargs={'postId': self.post2.id})
+        response = self.client.post(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(self.post2.likes.filter(id=self.user1.id).exists())
+
+    def test_unliking_own_post(self):
+        url = reverse('post_likes', kwargs={'postId': self.post1.id})
+        response = self.client.delete(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertFalse(self.post1.likes.filter(id=self.user1.id).exists())
+
+    def test_unliking_others_post(self):
+        url = reverse('post_likes', kwargs={'postId': self.post2.id})
+        response = self.client.delete(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertFalse(self.post2.likes.filter(id=self.user1.id).exists())
+
+    def test_liking_already_liked_post(self):
+        url = reverse('post_likes', kwargs={'postId': self.post1.id})
+        response = self.client.post(url)
+        
+        response = self.client.post(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(self.post1.likes.filter(id=self.user1.id).exists())
+
+    def test_unliking_already_unliked_post(self):
+        url = reverse('post_likes', kwargs={'postId': self.post1.id})
+        response = self.client.delete(url)
+        response = self.client.delete(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertFalse(self.post1.likes.filter(id=self.user1.id).exists())
+
+    def test_liking_non_existant_post(self):
+        url = reverse('post_likes', kwargs={'postId': 123141})
+        response = self.client.post(url)
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_unliking_non_existant_post(self):
+        url = reverse('post_likes', kwargs={'postId': 123141})
+        response = self.client.delete(url)
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

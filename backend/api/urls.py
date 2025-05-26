@@ -21,6 +21,7 @@ urlpatterns = [
     # Post endpoints
     path('posts', post_views.PostListCreateView.as_view(), name='post_list_create'),
     path('posts/<int:postId>', post_views.PostDetailEditDeleteView.as_view(), name='post_detail_edit_delete'),
+    path('posts/<int:postId>/like', post_views.PostLikesView.as_view(), name='post_likes'),
 
     # Comment endpoints
     path('posts/<int:post_id>/comments', comment_views.CommentListView.as_view(), name='comment_list'),

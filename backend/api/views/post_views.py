@@ -65,6 +65,21 @@ class PostDetailEditDeleteView(APIView):
         post.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class PostLikesView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, postId):
+        post = get_object_or_404(Post, pk=postId)
+        post.likes.add(request.user)
+        post.save()
+        return Response(status=status.HTTP_200_OK)
+
+    def delete(self, request, postId):
+        post: Post = get_object_or_404(Post, pk=postId)
+        post.likes.remove(request.user)
+        post.save()
+        return Response(status=status.HTTP_200_OK)
+
 # class PostDetailView(generics.RetrieveAPIView):
 #     """View to details of a specific post"""
 
