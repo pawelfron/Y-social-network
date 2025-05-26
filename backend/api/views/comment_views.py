@@ -17,7 +17,7 @@ class CommentListView(generics.ListAPIView):
     def get_queryset(self):
         post_id = self.kwargs.get('post_id')
         # Only get top-level comments (not replies)
-        return Comment.objects.filter(post_id=post_id, parent=None)
+        return Comment.objects.filter(post_id=post_id)
 
 class CommentCreateView(generics.CreateAPIView):
     """View to create a new comment or reply"""
@@ -26,6 +26,22 @@ class CommentCreateView(generics.CreateAPIView):
     
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+# class CommentDetailsUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Comment.objects.all()
+#     permission_classes = [permissions.IsAuthenticated]
+#     lookup_url_kwarg = 'comment_id'
+
+#     def perform_update(self, serializer):
+#         comment = self.get_object()
+#         if comment.author != self.request.user:
+#             raise exceptions.PermissionDenied("You can only update your own comments")
+#         serializer.save()
+
+#     def perform_destroy(self, instance):
+#         if instance.author != self.request.user:
+#             raise exceptions.PermissionDenied("You can only delete your own comments")
+#         instance.delete()
 
 class CommentDetailView(generics.RetrieveAPIView):
     """View to get details of a specific comment"""
@@ -58,11 +74,11 @@ class CommentDeleteView(generics.DestroyAPIView):
             raise exceptions.PermissionDenied("You can only delete your own comments")
         instance.delete()
 
-class CommentRepliesView(generics.ListAPIView):
-    """View to list replies to a specific comment"""
-    serializer_class = CommentSerializer
-    permission_classes = [permissions.IsAuthenticated]
+# class CommentRepliesView(generics.ListAPIView):
+#     """View to list replies to a specific comment"""
+#     serializer_class = CommentSerializer
+#     permission_classes = [permissions.IsAuthenticated]
     
-    def get_queryset(self):
-        comment_id = self.kwargs.get('comment_id')
-        return Comment.objects.filter(parent_id=comment_id) 
+#     def get_queryset(self):
+#         comment_id = self.kwargs.get('comment_id')
+#         return Comment.objects.filter(parent_id=comment_id) 

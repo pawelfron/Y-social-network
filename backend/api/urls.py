@@ -28,7 +28,7 @@ urlpatterns = [
     path('comments/<int:comment_id>', comment_views.CommentDetailView.as_view(), name='comment_detail'),
     path('comments/<int:comment_id>/edit', comment_views.CommentUpdateView.as_view(), name='comment_update'),
     path('comments/<int:comment_id>/delete', comment_views.CommentDeleteView.as_view(), name='comment_delete'),
-    path('comments/<int:comment_id>/replies', comment_views.CommentRepliesView.as_view(), name='comment_replies'),
+    # path('comments/<int:comment_id>/replies', comment_views.CommentRepliesView.as_view(), name='comment_replies'),
 
     # This is only for testing if authentication works; delete later
     path('useless', auth_views.UselessView.as_view(), name='test_protected_endpoint'),

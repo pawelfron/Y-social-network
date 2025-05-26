@@ -41,7 +41,7 @@ class Comment(models.Model):
     content = models.TextField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
+    # parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
     
     class Meta:
         ordering = ['-created_at']
@@ -49,10 +49,10 @@ class Comment(models.Model):
     def __str__(self):
         return f"Comment by {self.author.username} on {self.post}"
         
-    @property
-    def is_reply(self):
-        return self.parent is not None
+    # @property
+    # def is_reply(self):
+    #     return self.parent is not None
         
-    @property
-    def reply_count(self):
-        return self.replies.count()
+    # @property
+    # def reply_count(self):
+    #     return self.replies.count()
