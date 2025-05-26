@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import status
+from rest_framework import status, filters, generics
 from django.shortcuts import get_object_or_404
 
 from ..models import Post
@@ -19,11 +19,15 @@ class PostListCreateView(APIView):
 
     def get(self, request):
         only_followed = request.query_params.get('onlyFollowed') == 'true'
+        search_query = request.query_params.get('search')
         queryset = Post.objects.all().order_by('-created_at')
-        
+
         if only_followed:
             followed_users = request.user.following.all().values_list('followed', flat=True)
             queryset = queryset.filter(author__in=followed_users)
+        
+        if search_query:
+            queryset = queryset.filter(content__icontains=search_query)
         
         serializer = PostListSerializer(queryset, many=True)
         return Response(serializer.data)
@@ -72,13 +76,13 @@ class PostLikesView(APIView):
         post = get_object_or_404(Post, pk=postId)
         post.likes.add(request.user)
         post.save()
-        return Response(status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def delete(self, request, postId):
         post: Post = get_object_or_404(Post, pk=postId)
         post.likes.remove(request.user)
         post.save()
-        return Response(status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 # class PostDetailView(generics.RetrieveAPIView):
 #     """View to details of a specific post"""

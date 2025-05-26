@@ -34,7 +34,8 @@ class CommentCreateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Comment
-        fields = ['post', 'content']
+        fields = ['id', 'post', 'content']
+        read_only_fields = ['id']
 
     def create(self, validated_data):
         # Set the author to the current user when authentication is enabled

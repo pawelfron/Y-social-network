@@ -1,0 +1,93 @@
+POST /auth/register
+{username: string, email: string, password: string}
+{username: string, email: string}
+
+POST /auth/login
+{username: string, password: string}
+{access: string, refresh: string}
+
+POST /auth/refresh
+{refresh: string}
+{access: string}
+
+POST /auth/logout
+{refresh: string}
+{}
+
+
+GET /users?search=<string>
+{} empty
+[{id: int, username: string, profile_photo: idk, followers_count: int, following_count: int}]
+
+GET /users/<id>
+{} empty
+{id: int, username: string, first_name: string, last_name: string, email: string, profile_photo: idk, profile_description: string, date_joined: date, followers_count: int, following_count: int, is_following: bool}
+
+PUT /users/<id>/edit
+{username: string, first_name: string?, last_name: string?, profile_photo: idk?, profile_description: string?}
+{username: string, first_name: string, last_name: string, profile_photo: idk, profile_description: string}
+
+POST /users/<id>/followers
+{} empty
+[{user: {id: int, username: string, profile_photo: idk, followers_count: int, following_count: int}, created_at: date}]
+
+POST /users/<id>/following
+{} empty
+[{user: {id: int, username: string, profile_photo: idk, followers_count: int, following_count: int}, created_at: date}]
+
+POST /users/<id>/follow
+{} empty
+{detail: string}
+
+DELETE /users/<id>/unfollow
+{} empty
+{detail: string}
+
+
+GET /posts?onlyFollwed=<bool>&search=<string>
+{} empty
+[{id: int, content: string, image: idk, created_at: date, likes_count: int, author: {id: int, username: string, profile_photo: idk, followers_count: int, following_count: int}}]
+
+GET /posts/<id>
+{} empty
+{id: int, content: string, image: idk, created_at: date, likes: [int], likes_count: int, is_own_post: bool, author: {id: int, username: string, profile_photo: idk, followers_count: int, following_count: int}}
+
+POST /posts
+{content: string, image?: idk}
+{id: int, content: string, image: idk}
+
+PUT /posts
+{content?: string, image?: idk}
+{id: int, content: string, image: idk}
+
+DELETE /posts
+{} empty
+{} no content
+
+POST /posts/<id>/like
+{} empty
+{} no content
+
+DELETE /posts/<id>/like
+{} empty
+{} no content
+
+GET /posts/<id>/comments
+{} empty
+[{id: int, post: int, content: string, created_at: date, updated_at: date, author: {id: int, username: string, profile_photo: idk}}]
+
+POST /comments
+{post: int, content: string}
+{id: int, post: int, content: string}
+
+GET /comments/<id>
+{} empty
+{id: int, post: int, content: string, created_at: date, updated_at: date, author: {id: int, username: string, profile_photo: idk}}
+
+PUT /comments/<id>/edit
+{content: string}
+{content: string}
+
+DELETE /comments/<id>/delete
+{} empty
+{} NO content
