@@ -36,6 +36,9 @@ class Post(models.Model):
     def __str__(self):
         return f"Post by {self.author.username} at {self.created_at}"
     
+    def get_likes_count(self):
+        return self.likes.count()
+    
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments')

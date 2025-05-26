@@ -35,22 +35,29 @@ class PostEditSerializer(serializers.ModelSerializer):
 class PostDetailSerializer(serializers.ModelSerializer):
     author = UserBasicSerializer(read_only=True)
     is_own_post = serializers.SerializerMethodField()
+    likes_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
-        fields = ['id', 'content', 'image', 'created_at', 'author', 'is_own_post', 'likes']
+        fields = ['id', 'content', 'image', 'created_at', 'author', 'is_own_post', 'likes', 'likes_count']
     
     def get_is_own_post(self, obj):
         request = self.context.get('request')
         return request.user == obj.author if request and request.user.is_authenticated else False
 
+    def get_likes_count(self, obj):
+        return obj.get_likes_count()
+
 class PostListSerializer(serializers.ModelSerializer):
     """Serializer for post list (feed)"""
 
     author = UserBasicSerializer(read_only=True)
+    likes_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
-        fields = ['id', 'content', 'image', 'created_at', 'author', 'likes']
+        fields = ['id', 'content', 'image', 'created_at', 'author', 'likes_count']
 
+    def get_likes_count(self, obj):
+        return obj.get_likes_count()
 
