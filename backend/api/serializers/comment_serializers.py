@@ -17,24 +17,24 @@ class RecursiveCommentSerializer(serializers.Serializer):
 class CommentSerializer(serializers.ModelSerializer):
     """Serializer for comments with nested replies"""
     author = CommentAuthorSerializer(read_only=True)
-    replies = RecursiveCommentSerializer(many=True, read_only=True)
-    is_reply = serializers.ReadOnlyField()
-    reply_count = serializers.ReadOnlyField()
+    # replies = RecursiveCommentSerializer(many=True, read_only=True)
+    # is_reply = serializers.ReadOnlyField()
+    # reply_count = serializers.ReadOnlyField()
     
     class Meta:
         model = Comment
         fields = [
             'id', 'post', 'author', 'content', 'created_at', 
-            'updated_at', 'parent', 'is_reply', 'reply_count', 'replies'
+            'updated_at'
         ]
-        read_only_fields = ['created_at', 'updated_at', 'is_reply', 'reply_count']
+        read_only_fields = ['created_at', 'updated_at']
 
 class CommentCreateSerializer(serializers.ModelSerializer):
     """Serializer for creating comments"""
     
     class Meta:
         model = Comment
-        fields = ['post', 'content', 'parent']
+        fields = ['post', 'content']
 
     def create(self, validated_data):
         # Set the author to the current user when authentication is enabled
