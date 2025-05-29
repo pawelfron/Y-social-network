@@ -61,6 +61,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True # for dev
+
 ROOT_URLCONF = 'y_social_network.urls'
 
 TEMPLATES = [
