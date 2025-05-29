@@ -1,4 +1,4 @@
-import { FollowManageData, UserEditData, UserSummary, userWithDate } from '../interfaces/user';
+import { FollowManageData, UserDetails, UserEditData, UserSummary, userWithDate } from '../interfaces/user';
 import { axiosInstance } from './apiClient';
 
 export const UserService = {
@@ -7,12 +7,13 @@ export const UserService = {
     return res.data;
   },
 
-  async getUser(id: number): Promise<UserSummary> {
+  async getUser(id: number): Promise<UserDetails> {
     const res = await axiosInstance.get(`/users/${id}`);
     return res.data;
   },
 
   async editUser(id: number, data: UserEditData): Promise<UserEditData> {
+    console.log("Sending edit request:", { id, data });
     const res = await axiosInstance.put(`/users/${id}/edit`, data);
     return res.data;
   },

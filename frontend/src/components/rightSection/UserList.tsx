@@ -1,20 +1,19 @@
 import React from 'react'
 import UserCard from './UserCard.tsx'
 import './UserList.css'
+import { UserSummary } from '../../interfaces/user.ts';
 
-const UserList = () => {
-  const users = [
-    {name: "Adam", nickname: "adam99", profileFoto: ''},
-    {name: "Basia", nickname: "basiaaa", profileFoto: ''},
-    {name: "Wojtek", nickname: "wojtas", profileFoto: ''}
-  ]
+interface UserListProps {
+  users: UserSummary[];
+}
+
+const UserList: React.FC<UserListProps> = ({users}) => {
     
   return (
     <div className='ListWrapper'>
       {users.map(user => (
-        <UserCard key={user.nickname} {...user} />
+        <UserCard key={user.username} {...user} />
       ))}
-      <button className='showMoreButton'>Show more...</button>
     </div>
   );
   
