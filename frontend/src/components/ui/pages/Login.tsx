@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Ylogo from './../../../assets/Ylogo.jpg';
+import AuthService from '../../../services/AuthService'; 
 
 const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const authService = AuthService.get_instance(); 
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,21 +16,11 @@ const Login = () => {
     const password = (document.getElementById("password") as HTMLInputElement).value;
 
     try {
-      const response = await fetch("http://localhost:8000/api/login/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        localStorage.setItem("token", data.token);
-        navigate("/home");
-      } else {
-        alert(data.error || "Login failed");
-      }
-    } catch (error) {
-      alert("Network error or server not responding");
+      const token = await authService.login(email, password);
+      localStorage.setItem("token", token);
+      navigate("/home");
+    } catch (error: any) {
+      alert(error.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -83,3 +75,4 @@ const Login = () => {
 };
 
 export default Login;
+
