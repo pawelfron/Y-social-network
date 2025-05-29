@@ -5,7 +5,11 @@ import logo from "../../assets/Ylogo.jpg";
 import { useEffect, useRef } from "react";
 import { AuthService } from "../../services/authService";
 
-function CurrentUser() {
+interface LogoutProps {
+  onLogout: () => void;
+}
+
+const CurrentUser: React.FC<LogoutProps> = ({onLogout}) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const [menuVisible, setMenuVisible] = useState(false);
   const navigate = useNavigate();
@@ -20,6 +24,7 @@ function CurrentUser() {
 
   const handleLogout = () => {
     authService.logout();
+    onLogout();
     navigate("/login")
   }
 

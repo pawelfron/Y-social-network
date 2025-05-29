@@ -21,6 +21,9 @@ const Register = () => {
     try {
       await authService.register(username, email, password);
       await authService.login(username, password);
+      navigate('/');
+      //const userId = authService.getUserId();
+      //userService.editUser(userId, )
     } catch (err: any) {
       setError("Register failed");
     } finally {

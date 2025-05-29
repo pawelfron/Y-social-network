@@ -29,7 +29,7 @@ function App() {
         <div className="mainLayout">
           <div className="leftSection">
             <LeftBar />
-            <CurrentUser />
+            <CurrentUser onLogout={()=> setIsAuthenticated(false)}/>
           </div>
           <div className="mainContent">
             <Routes>
