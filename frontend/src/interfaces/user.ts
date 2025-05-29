@@ -22,3 +22,7 @@ export interface UserEditData {
   profile_photo?: File;
   profile_description?: string;
 }
+
+export interface FollowManageData {
+  details: string;
+}
