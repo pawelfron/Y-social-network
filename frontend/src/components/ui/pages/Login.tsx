@@ -6,14 +6,32 @@ const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    setTimeout(() => {
+    const email = (document.getElementById("email") as HTMLInputElement).value;
+    const password = (document.getElementById("password") as HTMLInputElement).value;
+
+    try {
+      const response = await fetch("http://localhost:8000/api/login/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+        navigate("/home");
+      } else {
+        alert(data.error || "Login failed");
+      }
+    } catch (error) {
+      alert("Network error or server not responding");
+    } finally {
       setLoading(false);
-      navigate('/home');
-    }, 1000);
+    }
   };
 
   return (
@@ -27,12 +45,14 @@ const Login = () => {
 
         <form onSubmit={handleLogin}>
           <input
+            id="email"
             type="email"
             placeholder="Email"
             className="w-full p-3 mb-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
             required
           />
           <input
+            id="password"
             type="password"
             placeholder="Password"
             className="w-full p-3 mb-6 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
