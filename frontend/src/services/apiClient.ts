@@ -4,7 +4,8 @@ import { AuthService } from './authService';
 const authService = AuthService.get_instance();
 
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.API_URL,
+  //baseURL: import.meta.env.API_URL,
+  baseURL: 'http://localhost:8000',
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
