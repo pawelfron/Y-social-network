@@ -1,8 +1,8 @@
 import React from 'react';
-import CreatePost from '../components/CreatePost/CreatePost';
-import Post from '../components/Post/Post';
+import CreatePost from '../../components/Post/CreatePost.tsx';
+import Post from '../../components/Post/Post.tsx';
 import './MainContent.css';
-import Tabs from '../components/Tabs/Tabs';
+import Tabs from '../../components/views/explore/Tabs.tsx';
 
 const MainContent = () => {
   return (

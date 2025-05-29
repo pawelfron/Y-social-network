@@ -1,19 +1,32 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./currentUser.css";
+import "./CurrentUser.css";
 import logo from "../../assets/Ylogo.jpg";
 import { useEffect, useRef } from "react";
+import { AuthService } from "../../services/authService";
 
-function CurrentUser() {
+interface LogoutProps {
+  onLogout: () => void;
+}
+
+const CurrentUser: React.FC<LogoutProps> = ({onLogout}) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const [menuVisible, setMenuVisible] = useState(false);
   const navigate = useNavigate();
+
+  const authService = AuthService.get_instance();
 
   const toggleMenu = () => setMenuVisible((prev) => !prev);
 
   const goToSettings = () => {
     navigate("/settings");
   };
+
+  const handleLogout = () => {
+    authService.logout();
+    onLogout();
+    navigate("/login")
+  }
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -42,8 +55,8 @@ function CurrentUser() {
       </button>
 
       {menuVisible && (
-        <div className="dropdown-menu">
-          <button onClick={() => alert("Logged out")} className="dropdown-item">
+        <div className="dropdown-menu-user">
+          <button onClick={handleLogout} className="dropdown-item">
             Log out
           </button>
           <button onClick={goToSettings} className="dropdown-item">

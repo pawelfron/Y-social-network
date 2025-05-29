@@ -1,0 +1,124 @@
+/* Globalne style dla tła */
+.login-container {
+  background-color: black;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style dla formularza logowania */
+.login-form {
+  background-color: black;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  width: 24rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Kontener logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Logo */
+.logo {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+}
+
+/* Tytuł logowania */
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #1a202c; /* dark gray */
+}
+
+/* Pola formularza */
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  color: #1a202c;
+}
+
+/* Style dla focus na polu formularza */
+.input-field:focus {
+  outline: none;
+  border-color: #63b3ed;
+  box-shadow: 0 0 0 2px rgba(99, 179, 237, 0.5);
+}
+
+/* Przycisk logowania */
+.submit-button {
+  width: 100%; /* Zapewni, że przycisk ma tę samą szerokość co pola input */
+  background-color: black;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 9999px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem; /* Dodałem odrobinę marginesu, żeby przycisk był oddzielony od pól */
+}
+
+/* Hover efekt dla przycisku */
+.submit-button:hover {
+  background-color: #2d3748;
+}
+
+/* Disabled state przycisku */
+.submit-button:disabled {
+  background-color: #4a5568;
+  cursor: not-allowed;
+}
+
+/* Animacja spinnera */
+.spinner {
+  border: 2px solid white;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  animation: spin 1s linear infinite;
+}
+
+/* Animacja spinnera */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Tekst do rejestracji */
+.signup-text {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #718096; /* light gray */
+}
+
+/* Link do rejestracji */
+.signup-link {
+  color: #3182ce;
+  text-decoration: underline;
+}
+
+.signup-link:hover {
+  color: #2b6cb0;
+}

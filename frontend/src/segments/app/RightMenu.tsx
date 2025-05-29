@@ -1,6 +1,6 @@
-import SearchBar from '../components/search_bar/SearchBar'
-import UserList from '../components/user_list/UserList'
-import "./RightMenu.css"
+import SearchBar from "../../components/SearchBar/SearchBar.tsx";
+import UserList from "../../components/rightSection/UserList.tsx";
+import "./RightMenu.css";
 
 const RightMenu = () => {
   return (

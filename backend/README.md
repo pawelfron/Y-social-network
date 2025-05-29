@@ -2,6 +2,15 @@
 
 This is the backend for Y Social Network, a platform that allows users to create profiles, follow each other, and interact.
 
+## Starting with docker
+
+1. Add django key to .env in backend dir.
+
+2. Run command
+```bash
+docker-compose up --build
+```
+
 ## Setting up the development environment
 
 1. Clone the repository and navigate to the backend directory:

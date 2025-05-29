@@ -48,7 +48,7 @@
   color: #2563eb; /* Kolor przycisku po hover */
 }
 
-.dropdown-menu {
+.dropdown-menu-user {
   position: absolute;
   bottom: 60%;
   right: 0;

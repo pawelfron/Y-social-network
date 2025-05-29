@@ -1,23 +1,27 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useState } from "react";
-import LeftBar from "./components/leftBar/leftBar";
-import CurrentUser from "./components/currentUser/currentUser";
-import RightMenu from "./segments/RightMenu";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import LeftBar from "./segments/app/LeftBar.tsx";
+import CurrentUser from "./components/leftSection/CurrentUser.tsx";
+import RightMenu from "./segments/app/RightMenu.tsx";
 import "./index.css";
 import "./App.css";
-import MainContent from "./segments/MainContent";
-import Notifications from "./segments/Notifications";
-import Profile from "./components/ui/Profile/Profile";
-import Login from "./components/ui/pages/Login";
-import Register from "./components/ui/pages/Register";
-import Explore from "./segments/Explore";
-import Bookmarks from "./segments/Bookmarks";
+import MainContent from "./segments/app/MainContent.tsx";
+import Notifications from "./components/views/Notifications.tsx";
+import Profile from "./components/views/Profile.tsx";
+import Login from "./segments/auth/Login.tsx";
+import Register from "./segments/auth/Register.tsx";
+import Explore from "./components/views/explore/Explore.tsx";
+import Bookmarks from "./components/views/Bookmarks.tsx";
+import Settings from "./components/views/settings/Settings.tsx";
+import { AuthService } from "./services/authService.ts";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // Stan logowania
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Funkcja do obsługi logowania
-  const handleLogin = () => setIsAuthenticated(true);
+  useEffect(() => {
+    const auth = AuthService.get_instance();
+    setIsAuthenticated(auth.isLoggedIn());
+  }, []);
 
   return (
     <div className="appContainer">
@@ -25,7 +29,7 @@ function App() {
         <div className="mainLayout">
           <div className="leftSection">
             <LeftBar />
-            <CurrentUser />
+            <CurrentUser onLogout={()=> setIsAuthenticated(false)}/>
           </div>
           <div className="mainContent">
             <Routes>
@@ -34,6 +38,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/explore" element={<Explore />} />
               <Route path="/bookmarks" element={<Bookmarks />} />
+              <Route path="/settings" element={<Settings />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </div>
@@ -43,7 +48,7 @@ function App() {
         </div>
       ) : (
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login onLogin={() => setIsAuthenticated(true)}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
