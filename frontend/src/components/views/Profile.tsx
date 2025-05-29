@@ -22,6 +22,8 @@ const Profile = () => {
   const [editedLastName, setEditedLastName] = useState("");
   const [editedPhoto, setEditedPhoto] = useState("");
   const [editedBio, setEditedBio] = useState("");
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [followLoading, setFollowLoading] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -30,6 +32,12 @@ const Profile = () => {
       try {
         const userData = await UserService.getUser(parsedUserId);
         setUser(userData);
+
+        if (parsedUserId !== currentUserId) {
+          const following = await UserService.getFollowing(currentUserId!);
+          const followingStatus = following.some((u) => u.user.id === parsedUserId);
+          setIsFollowing(followingStatus);
+        }
       } catch (error) {
         console.error("Błąd podczas pobierania użytkownika:", error);
       } finally {
@@ -38,7 +46,7 @@ const Profile = () => {
     };
 
     fetchUser();
-  }, [parsedUserId]);
+  }, [parsedUserId, currentUserId]);
 
   const startEditing = () => {
     if (user) {
@@ -58,7 +66,7 @@ const Profile = () => {
         username: user.username,
         first_name: editedFirstName,
         last_name: editedLastName,
-        //profile_photo: editedPhoto,
+        profile_photo: editedPhoto,
         profile_description: editedBio,
       };
 
@@ -76,6 +84,29 @@ const Profile = () => {
       console.error("Błąd edycji profilu", err);
     }
   };
+
+  const handleFollowToggle = async () => {
+  if (!user) return;
+  setFollowLoading(true);
+  try {
+    if (isFollowing) {
+      await UserService.unfollowUser(user.id);
+      setIsFollowing(false);
+    } else {
+      await UserService.followUser(user.id);
+      setIsFollowing(true);
+    }
+
+    const updatedUser = await UserService.getUser(user.id);
+    setUser(updatedUser);
+
+  } catch (error) {
+    console.error("Follow/unfollow failed", error);
+  } finally {
+    setFollowLoading(false);
+  }
+};
+
 
   if (loading) return <div>Ładowanie profilu...</div>;
   if (!user) return <div>Nie znaleziono użytkownika</div>;
@@ -158,8 +189,8 @@ const Profile = () => {
         </button>
       )}
       {showFollowButton && (
-        <button className="follow-button">
-          {user.is_following ? "Unfollow" : "Follow"}
+        <button className="follow-button" onClick={handleFollowToggle} disabled={followLoading}>
+          {followLoading ? "..." : isFollowing ? "Unfollow" : "Follow"}
         </button>
       )}
     </div>
