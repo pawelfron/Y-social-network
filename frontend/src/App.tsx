@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import LeftBar from "./components/leftBar/leftBar";
 import CurrentUser from "./components/currentUser/currentUser";
@@ -12,11 +12,11 @@ import Login from "./components/ui/pages/Login";
 import Register from "./components/ui/pages/Register";
 import Explore from "./segments/Explore";
 import Bookmarks from "./segments/Bookmarks";
+import Settings from "./segments/Settings";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // Stan logowania
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
-  // Funkcja do obsługi logowania
   const handleLogin = () => setIsAuthenticated(true);
 
   return (
@@ -34,6 +34,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/explore" element={<Explore />} />
               <Route path="/bookmarks" element={<Bookmarks />} />
+              <Route path="/settings" element={<Settings />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </div>

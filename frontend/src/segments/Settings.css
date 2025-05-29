@@ -1,0 +1,42 @@
+.mainSettings {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.title {
+  color: white;
+}
+
+/* Stylowanie kontenera listy rozwijanej */
+.dropdown-container {
+  width: 100%;
+  max-width: 540px; /* Maksymalna szerokość kontenera */
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 10px;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Styl dla strzałki rozwijającej menu */
+.arrow {
+  float: right;
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+/* Stylowanie menu po rozwinięciu */
+.dropdown-menu {
+  margin-top: 10px;
+  background-color: #2b2b2b;
+  border-radius: 8px;
+  position: absolute;
+}
+
+.dropdown-menu .dropdown-item {
+  padding-left: 20px;
+}

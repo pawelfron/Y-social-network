@@ -1,21 +1,21 @@
 import React from "react";
 import "./Profile.css";
-import profileBackground from "../../../assets/background-photo.jpg"; // Import tła z assets
-import profileAvatar from "../../../assets/default-avatar.jpg"; // Import zdjęcia profilowego
+import profileBackground from "../../../assets/background-photo.jpg";
+import profileAvatar from "../../../assets/default-avatar.jpg";
 
 const Profile = () => {
   return (
     <div className="profile-container">
       <div className="profile-header">
         <img
-          src={profileBackground} // Dodaj URL tła
+          src={profileBackground}
           alt="Profile Background"
           className="profile-background"
         />
         <div className="profile-details">
           <div className="profile-picture">
             <img
-              src={profileAvatar} // Dodaj URL zdjęcia profilowego
+              src={profileAvatar}
               alt="Profile"
               className="profile-avatar"
             />
