@@ -1,6 +1,6 @@
 import React from 'react'
-import SearchBar from '../components/search_bar/SearchBar'
-import Post from '../components/Post/Post'
+import SearchBar from '../../SearchBar/SearchBar.tsx'
+import Post from '../../Post/Post.tsx'
 
 const Explore = () => {
   return (

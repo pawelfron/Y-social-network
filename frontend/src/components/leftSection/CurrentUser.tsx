@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./currentUser.css";
+import "./CurrentUser.css";
 import logo from "../../assets/Ylogo.jpg";
 import { useEffect, useRef } from "react";
 

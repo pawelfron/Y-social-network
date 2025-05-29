@@ -1,7 +1,7 @@
 import React from "react";
 import "./Profile.css";
-import profileBackground from "../../../assets/background-photo.jpg";
-import profileAvatar from "../../../assets/default-avatar.jpg";
+import profileBackground from "../../assets/background-photo.jpg";
+import profileAvatar from "../../assets/default-avatar.jpg";
 
 const Profile = () => {
   return (

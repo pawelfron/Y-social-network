@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Ylogo from "./../../../assets/Ylogo.jpg";
+import Ylogo from "../../assets/Ylogo.jpg";
 import "./Register.css";
 
 const Register = () => {

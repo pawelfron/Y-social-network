@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Settings.css";
-import SearchBar from "../components/search_bar/SearchBar";
-import RightSettings from "../components/RightSettings/RightSettings"; // Zaimportuj komponent RightSettings
+import SearchBar from "../../SearchBar/SearchBar.tsx";
+import RightSettings from "./RightSettings.tsx"; // Zaimportuj komponent RightSettings
 
 const Settings = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null); // Stan aktywnego dropdownu

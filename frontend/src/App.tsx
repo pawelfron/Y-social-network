@@ -1,18 +1,18 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useState } from "react";
-import LeftBar from "./components/leftBar/leftBar";
-import CurrentUser from "./components/currentUser/currentUser";
-import RightMenu from "./segments/RightMenu";
+import LeftBar from "./segments/app/LeftBar.tsx";
+import CurrentUser from "./components/leftSection/CurrentUser.tsx";
+import RightMenu from "./segments/app/RightMenu.tsx";
 import "./index.css";
 import "./App.css";
-import MainContent from "./segments/MainContent";
-import Notifications from "./segments/Notifications";
-import Profile from "./components/ui/Profile/Profile";
-import Login from "./components/ui/pages/Login";
-import Register from "./components/ui/pages/Register";
-import Explore from "./segments/Explore";
-import Bookmarks from "./segments/Bookmarks";
-import Settings from "./segments/Settings";
+import MainContent from "./segments/app/MainContent.tsx";
+import Notifications from "./components/views/Notifications.tsx";
+import Profile from "./components/views/Profile.tsx";
+import Login from "./segments/auth/Login.tsx";
+import Register from "./segments/auth/Register.tsx";
+import Explore from "./components/views/explore/Explore.tsx";
+import Bookmarks from "./components/views/Bookmarks.tsx";
+import Settings from "./components/views/settings/Settings.tsx";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
