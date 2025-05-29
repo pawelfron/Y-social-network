@@ -7,18 +7,34 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
-      setSuccess(true);
+    const name = (document.getElementById("name") as HTMLInputElement).value;
+    const email = (document.getElementById("email") as HTMLInputElement).value;
+    const password = (document.getElementById("password") as HTMLInputElement).value;
 
-      setTimeout(() => {
-        navigate('/home');
-      }, 2000);
-    }, 1000);
+    try {
+      const response = await fetch("http://localhost:8000/api/register/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setSuccess(true);
+        localStorage.setItem("token", data.token);
+        setTimeout(() => navigate("/home"), 2000);
+      } else {
+        alert(data.error || "Registration failed");
+      }
+    } catch (error) {
+      alert("Network error or server not responding");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -37,18 +53,21 @@ const Register = () => {
         ) : (
           <form onSubmit={handleRegister}>
             <input
+              id="name"
               type="text"
               placeholder="Name"
               className="w-full p-3 mb-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
               required
             />
             <input
+              id="email"
               type="email"
               placeholder="Email"
               className="w-full p-3 mb-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
               required
             />
             <input
+              id="password"
               type="password"
               placeholder="Password"
               className="w-full p-3 mb-6 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
