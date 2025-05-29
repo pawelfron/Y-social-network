@@ -2,19 +2,34 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Ylogo from "../../assets/Ylogo.jpg";
 import "./Login.css";
+import { AuthService } from "../../services/authService";
 
-const Login = () => {
+interface LoginProps {
+  onLogin: () => void;
+}
+
+const Login:React.FC<LoginProps> = ({onLogin}) => {
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const authService = AuthService.get_instance()
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
 
-    setTimeout(() => {
+    try {
+      await authService.login(username, password);
+      onLogin();
+      navigate("/");
+    } catch (err: any) {
+      setError("Login failed");
+    } finally {
       setLoading(false);
-      navigate("/home");
-    }, 1000);
+    }
   };
 
   return (
@@ -27,18 +42,23 @@ const Login = () => {
         <h2 className="title">Log in to Y</h2>
 
         <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            placeholder="Email"
+         <input
+            type="text"
+            placeholder="Username"
             className="input-field"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
           <input
             type="password"
             placeholder="Password"
             className="input-field"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
+          {error && <p className="error-text">{error}</p>}
           <button type="submit" className="submit-button" disabled={loading}>
             {loading ? <div className="spinner"></div> : "Log In"}
           </button>

@@ -16,7 +16,8 @@ export class AuthService {
   }
 
 
-  private baseUrl = process.env.API_URL!;
+  //private baseUrl = import.meta.env.API_URL;
+  private baseUrl = 'http://localhost:8000';
   private accessToken: string | null = null;
   private refreshToken: string | null = null;
 
@@ -48,7 +49,7 @@ export class AuthService {
   }
 
   async register(username: string, email: string, password: string) {
-    const res = await axios.post(`${this.baseUrl}/register`, {
+    const res = await axios.post(`${this.baseUrl}/auth/register`, {
       username,
       email,
       password
@@ -57,7 +58,7 @@ export class AuthService {
   }
 
   async login(username: string, password: string) {
-    const res = await axios.post(`${this.baseUrl}/login`, {
+    const res = await axios.post(`${this.baseUrl}/auth/login`, {
       username,
       password
     });
@@ -70,7 +71,7 @@ export class AuthService {
   async tokenRefresh() {
     if (!this.refreshToken) throw new Error('Brak refresh tokenu');
 
-    const res = await axios.post(`${this.baseUrl}/refresh`, {
+    const res = await axios.post(`${this.baseUrl}/auth/refresh`, {
       refresh: this.refreshToken
     });
 
@@ -83,7 +84,7 @@ export class AuthService {
     if (!this.refreshToken) return;
 
     try {
-      await axios.post(`${this.baseUrl}/logout`, {
+      await axios.post(`${this.baseUrl}/auth/logout`, {
         refresh: this.refreshToken
       });
     } catch (e) {

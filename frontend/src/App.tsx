@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LeftBar from "./segments/app/LeftBar.tsx";
 import CurrentUser from "./components/leftSection/CurrentUser.tsx";
 import RightMenu from "./segments/app/RightMenu.tsx";
@@ -13,11 +13,15 @@ import Register from "./segments/auth/Register.tsx";
 import Explore from "./components/views/explore/Explore.tsx";
 import Bookmarks from "./components/views/Bookmarks.tsx";
 import Settings from "./components/views/settings/Settings.tsx";
+import { AuthService } from "./services/authService.ts";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const handleLogin = () => setIsAuthenticated(true);
+  useEffect(() => {
+    const auth = AuthService.get_instance();
+    setIsAuthenticated(auth.isLoggedIn());
+  }, []);
 
   return (
     <div className="appContainer">
@@ -44,7 +48,7 @@ function App() {
         </div>
       ) : (
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login onLogin={() => setIsAuthenticated(true)}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
