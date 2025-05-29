@@ -1,4 +1,4 @@
-import { FollowManageData, UserEditData, UserSummary } from '../interfaces/user';
+import { FollowManageData, UserEditData, UserSummary, userWithDate } from '../interfaces/user';
 import { axiosInstance } from './apiClient';
 
 export const UserService = {
@@ -18,10 +18,22 @@ export const UserService = {
   },
 
   async followUser(id: number): Promise<FollowManageData> {
-    return axiosInstance.post(`/users/${id}/follow`);
+    const res = await axiosInstance.post(`/users/${id}/follow`);
+    return res.data;
   },
 
   async unfollowUser(id: number): Promise<FollowManageData> {
-    return axiosInstance.delete(`/users/${id}/unfollow`);
+    const res = await axiosInstance.delete(`/users/${id}/unfollow`);
+    return res.data
   },
+
+  async getFollowers(id: number): Promise<userWithDate[]>{
+    const res = await axiosInstance.get(`/users/${id}/followers`)
+    return res.data
+  },
+
+  async getFollowing(id: number): Promise<userWithDate[]>{
+    const res = await axiosInstance.get(`/users/${id}/following`)
+    return res.data
+  }
 };

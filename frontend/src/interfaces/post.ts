@@ -9,7 +9,7 @@ export interface PostAuthor {
 export interface PostSummary {
   id: number;
   content: string;
-  image: Blob; 
+  image: string; 
   created_at: string;
   likes_count: number;
   author: PostAuthor;
@@ -22,10 +22,14 @@ export interface PostDetails extends PostSummary {
 
 export interface PostCreateData {
   content: string;
-  image?: File;
+  image?: string;
 }
 
 export interface PostUpdateData {
   content?: string;
-  image?: File;
+  image?: string;
+}
+
+export interface PostInfo extends PostCreateData{
+    id: number
 }

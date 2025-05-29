@@ -1,7 +1,7 @@
 export interface UserSummary {
   id: number;
   username: string;
-  profile_photo: Blob; 
+  profile_photo: string; 
   followers_count: number;
   following_count: number;
 }
@@ -19,10 +19,15 @@ export interface UserEditData {
   username: string;
   first_name?: string;
   last_name?: string;
-  profile_photo?: File;
+  profile_photo?: string;
   profile_description?: string;
 }
 
 export interface FollowManageData {
   details: string;
+}
+
+export interface userWithDate {
+  user: UserSummary
+  created_at: Date
 }
