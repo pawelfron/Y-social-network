@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+iimport React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Ylogo from './../../../assets/Ylogo.jpg';
+import AuthService from '../../../services/AuthService'; 
 
 const Register = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const authService = AuthService.get_instance(); 
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,22 +18,12 @@ const Register = () => {
     const password = (document.getElementById("password") as HTMLInputElement).value;
 
     try {
-      const response = await fetch("http://localhost:8000/api/register/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setSuccess(true);
-        localStorage.setItem("token", data.token);
-        setTimeout(() => navigate("/home"), 2000);
-      } else {
-        alert(data.error || "Registration failed");
-      }
-    } catch (error) {
-      alert("Network error or server not responding");
+      const token = await authService.register(name, email, password);
+      setSuccess(true);
+      localStorage.setItem("token", token);
+      setTimeout(() => navigate("/home"), 2000);
+    } catch (error: any) {
+      alert(error.message || "Registration failed");
     } finally {
       setLoading(false);
     }
