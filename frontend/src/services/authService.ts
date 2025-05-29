@@ -2,17 +2,31 @@ import axios from 'axios';
 import { getUserIdFromToken } from '../utils/jwt';
 
 export class AuthService {
-  private baseUrl = import.meta.env.API_URL;
+  private static instance: AuthService | null = null;
+
+  static get_instance(){
+    if (!AuthService.instance){
+      AuthService.instance = new AuthService();
+    }
+    return AuthService.instance
+  }
+
+  static reset_instance() {
+    AuthService.instance = null;
+  }
+
+
+  private baseUrl = process.env.API_URL!;
   private accessToken: string | null = null;
   private refreshToken: string | null = null;
 
-  constructor() {
+  private constructor() {
     this.loadTokensFromStorage();
   }
 
   private loadTokensFromStorage() {
-    this.accessToken = localStorage.getItem('access');
-    this.refreshToken = localStorage.getItem('refresh');
+    this.accessToken = localStorage.getItem('accessToken');
+    this.refreshToken = localStorage.getItem('refreshToken');
 
     if (this.accessToken) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${this.accessToken}`;
@@ -22,17 +36,15 @@ export class AuthService {
   private saveTokens(access: string, refresh: string) {
     this.accessToken = access;
     this.refreshToken = refresh;
-    localStorage.setItem('access', access);
-    localStorage.setItem('refresh', refresh);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${access}`;
+    localStorage.setItem('accessToken', access);
+    localStorage.setItem('refreshToken', refresh);
   }
 
   private clearTokens() {
     this.accessToken = null;
     this.refreshToken = null;
-    localStorage.removeItem('access');
-    localStorage.removeItem('refresh');
-    delete axios.defaults.headers.common['Authorization'];
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
   }
 
   async register(username: string, email: string, password: string) {
