@@ -44,7 +44,7 @@ const UserCard = (user: UserSummary) => {
   };
 
   const showUserProfile = () => {
-    navigate(`/profile/${user.username}`);
+    navigate(`/profile/${user.id}`);
   }
 
   return (
