@@ -4,8 +4,7 @@ import "./CurrentUser.css";
 import logo from "../../assets/Ylogo.jpg";
 import profileAvatar from "../../assets/default-avatar.jpg";
 import { AuthService } from "../../services/authService";
-import { UserService } from "../../services/userService";
-import { UserDetails } from "../../interfaces/user";
+import { useUser } from "../../contexts/UserContext";
 
 interface LogoutProps {
   onLogout: () => void;
@@ -17,26 +16,8 @@ const CurrentUser: React.FC<LogoutProps> = ({ onLogout }) => {
   const navigate = useNavigate();
   const authService = AuthService.get_instance();
 
-  const [currentUser, setCurrentUser] = useState<UserDetails | null>(null);
+  const { user: currentUser } = useUser();
 
-  // Fetch user once
-  useEffect(() => {
-    const fetchCurrentUser = async () => {
-      const currentUserId = authService.getUserId();
-      if (!currentUserId) return;
-
-      try {
-        const user = await UserService.getUser(currentUserId);
-        setCurrentUser(user);
-      } catch (err) {
-        console.error("Błąd pobierania aktualnego użytkownika:", err);
-      }
-    };
-
-    fetchCurrentUser();
-  }, [authService]);
-
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -60,7 +41,6 @@ const CurrentUser: React.FC<LogoutProps> = ({ onLogout }) => {
     navigate("/login");
   };
 
-  // Early return while loading
   if (!currentUser) {
     return (
       <div className="user-profile-placeholder">
