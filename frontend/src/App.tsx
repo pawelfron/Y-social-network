@@ -14,9 +14,21 @@ import Explore from "./components/views/explore/Explore.tsx";
 import Bookmarks from "./components/views/Bookmarks.tsx";
 import Settings from "./components/views/settings/Settings.tsx";
 import { AuthService } from "./services/authService.ts";
+import Modal from "./components/Modal/Modal.tsx";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
+
+  const openModalWith = (content: React.ReactNode) => {
+    setModalContent(content);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setModalContent(null);
+  };
 
   useEffect(() => {
     const auth = AuthService.get_instance();
@@ -26,6 +38,7 @@ function App() {
   return (
     <div className="appContainer">
       {isAuthenticated ? (
+        <>
         <div className="mainLayout">
           <div className="leftSection">
             <LeftBar />
@@ -35,7 +48,7 @@ function App() {
             <Routes>
               <Route path="/" element={<MainContent />} />
               <Route path="/notifications" element={<Notifications />} />
-              <Route path="/profile/:userId" element={<Profile />} />
+              <Route path="/profile/:userId" element={<Profile onOpenModal={openModalWith} />} />
               <Route path="/explore" element={<Explore />} />
               <Route path="/bookmarks" element={<Bookmarks />} />
               <Route path="/settings" element={<Settings />} />
@@ -46,6 +59,14 @@ function App() {
             <RightMenu />
           </div>
         </div>
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)}>
+            {modalContent}
+            <button onClick={() => setShowModal(false)}>Zamknij</button>
+          </Modal>
+        )}
+        </>
+
       ) : (
         <Routes>
           <Route path="/login" element={<Login onLogin={() => setIsAuthenticated(true)}/>} />

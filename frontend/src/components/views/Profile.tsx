@@ -6,17 +6,27 @@ import { useParams } from "react-router-dom";
 import { UserService } from "../../services/userService";
 import { UserDetails } from "../../interfaces/user";
 import { AuthService } from "../../services/authService";
+import UserList from "../rightSection/UserList";
+import { useUser } from "../../contexts/UserContext";
+import ImageUploader from "../ImageUploader/ImageUploader";
 
-const Profile = () => {
+interface ProfileProps {
+  onOpenModal: (content: React.ReactNode) => void;
+}
+
+const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
   const { userId } = useParams();
   const parsedUserId = userId ? parseInt(userId, 10) : undefined;
 
-  const authService = AuthService.get_instance();
-  const currentUserId = authService.getUserId();
+  const { user: currentUser, refreshUser } = useUser();
+  const currentUserId = currentUser?.id;
+
 
   const [user, setUser] = useState<UserDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  // const [followedVisible, setFollowedVisible] = useState(false);
+  // const [followingVisible, setFollowingVisible] = useState(false);
 
   const [editedFirstName, setEditedFirstName] = useState("");
   const [editedLastName, setEditedLastName] = useState("");
@@ -79,7 +89,11 @@ const Profile = () => {
             }
           : prev
       );
+      if (user.id === currentUserId) {
+        await refreshUser(); 
+      }
       setIsEditing(false);
+
     } catch (err) {
       console.error("Błąd edycji profilu", err);
     }
@@ -146,12 +160,14 @@ const Profile = () => {
                   onChange={(e) => setEditedLastName(e.target.value)}
                   placeholder="Last name"
                 />
-                <input
-                  type="text"
-                  value={editedPhoto}
-                  onChange={(e) => setEditedPhoto(e.target.value)}
-                  placeholder="Profile photo URL"
-                />
+                <ImageUploader onImageSelect={setEditedPhoto} />
+                {editedPhoto && (
+                  <img
+                    src={editedPhoto}
+                    alt="Preview"
+                    style={{ maxWidth: "200px", borderRadius: "8px", marginTop: "10px" }}
+                  />
+                )}
                 <textarea
                   value={editedBio}
                   onChange={(e) => setEditedBio(e.target.value)}
@@ -175,8 +191,21 @@ const Profile = () => {
                   })}
                 </p>
                 <div className="profile-follow">
-                  <span className="profile-following">{user.following_count} Following</span>
-                  <span className="profile-followers">{user.followers_count} Followers</span>
+                  <span
+                    className="profile-following"
+                    onClick={async () => {
+                      const response = await UserService.getFollowing(parsedUserId!);
+                      const users = response.map(entry => entry.user);
+                      onOpenModal(<UserList users={users} />);
+                    }}
+                  >
+                    {user.following_count} Following
+                  </span>
+                  <span className="profile-followers" onClick={async () => {
+                      const response = await UserService.getFollowers(parsedUserId!);
+                      const users = response.map(entry => entry.user);
+                      onOpenModal(<UserList users={users} />);
+                    }}>{user.followers_count} Followers</span>
                 </div>
               </>
             )}
