@@ -3,18 +3,16 @@ import { axiosInstance } from "./apiClient";
 
 export const PostService ={
     
-    async searchPosts(onlyFollowed: boolean, searchQuery: string): Promise<PostSummary[]> {
+    async searchPosts(onlyFollowed: boolean, searchQuery: string): Promise<PostDetails[]> {
         const res = await axiosInstance.get(`/posts?onlyFollowed=${onlyFollowed}&search=${searchQuery}`);
         return res.data;
     },
 
-    async getUserPosts(userId: number) : Promise<PostDetails[]> {
-        console.log(`/posts`);
-        const res = await axiosInstance.get(`/posts`, {
-        params: { userId }
-    });
-        return res.data;
-    },
+    async getUserPosts(userId: number): Promise<PostDetails[]> {
+        const res = await axiosInstance.get(`/posts`);
+        return res.data.filter((post: PostSummary) => post.author.id === userId);
+    }
+,
 
     async createPost(postData: PostCreateData) : Promise<PostInfo> {
         const res = await axiosInstance.post(`/posts`, postData);

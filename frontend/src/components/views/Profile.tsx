@@ -10,7 +10,7 @@ import UserList from "../rightSection/UserList";
 import { useUser } from "../../contexts/UserContext";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import { PostService } from "../../services/postService";
-import { PostSummary } from "../../interfaces/post";
+import { PostDetails, PostSummary } from "../../interfaces/post";
 import PostList from "../Post/PostList";
 
 interface ProfileProps {
@@ -24,7 +24,7 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
   const { user: currentUser, refreshUser } = useUser();
   const currentUserId = currentUser?.id;
 
-  const [posts, setPosts] = useState<PostSummary[]>([]);
+  const [posts, setPosts] = useState<PostDetails[]>([]);
 
   useEffect(() => {
     const fetchUserPosts = async () => {
