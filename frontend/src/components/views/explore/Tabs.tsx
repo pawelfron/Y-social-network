@@ -1,20 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Tabs.css';
 
-const Tabs = () => {
-  const [activeTab, setActiveTab] = useState('forYou');
+interface TabsProps {
+  onTabChange: (tab: 'forYou' | 'following') => void;
+}
+
+const Tabs: React.FC<TabsProps> = ({ onTabChange }) => {
+  const [activeTab, setActiveTab] = useState<'forYou' | 'following'>('forYou');
+
+  const handleTabClick = (tab: 'forYou' | 'following') => {
+    if (tab !== activeTab) {
+      setActiveTab(tab);        // Ustaw lokalnie, by działało stylowanie
+      onTabChange(tab);         // Przekaż do rodzica
+    }
+  };
 
   return (
     <div className="tabsWrapper">
       <div
         className={`tab ${activeTab === 'forYou' ? 'active' : ''}`}
-        onClick={() => setActiveTab('forYou')}
+        onClick={() => handleTabClick('forYou')}
       >
         For you
       </div>
       <div
         className={`tab ${activeTab === 'following' ? 'active' : ''}`}
-        onClick={() => setActiveTab('following')}
+        onClick={() => handleTabClick('following')}
       >
         Following
       </div>

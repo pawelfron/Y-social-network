@@ -41,8 +41,8 @@ function App() {
         <>
         <div className="mainLayout">
           <div className="leftSection">
-            <LeftBar />
-            <CurrentUser onLogout={()=> setIsAuthenticated(false)}/>
+            <LeftBar onOpenModal={openModalWith} />
+            <CurrentUser onLogout={()=> setIsAuthenticated(false) }/>
           </div>
           <div className="mainContent">
             <Routes>

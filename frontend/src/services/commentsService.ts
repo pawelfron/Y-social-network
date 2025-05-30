@@ -1,4 +1,4 @@
-import { CommentContent, CommentCreateData, CommentWithID } from "../interfaces/comment";
+import { CommentContent, CommentCreateData, CommentWithID, Comment } from "../interfaces/comment";
 import { axiosInstance } from "./apiClient"
 
 export const CommentsService = {

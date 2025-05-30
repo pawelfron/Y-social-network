@@ -3,6 +3,9 @@ import { Image, Smile, CalendarClock, MapPin, CircleOff, AlignLeft, X, Globe2, U
 // @ts-ignore
 import EmojiPicker, { Theme } from 'emoji-picker-react';
 import './CreatePost.css';
+import { PostService } from '../../services/postService';
+import profileAvatar from "../../assets/default-avatar.jpg";
+
 
 interface Post {
   id: number;
@@ -62,30 +65,34 @@ const CreatePost = () => {
     setPreviewUrls(prev => prev.filter((_, i) => i !== index));
   };
 
-  const handlePost = () => {
-    if (!text.trim() && images.length === 0) return;
+  const handlePost = async () => {
+  if (!text.trim() && images.length === 0) return;
 
-    const newPost: Post = {
-      id: Date.now(),
-      text,
-      images: previewUrls,
-      replySetting,
-    };
+  try {
+    await PostService.createPost({
+      content: text,
+      image: images[0]// tylko jeden obrazek obsługiwany przez backend
+    });
 
-    setPosts(prev => [newPost, ...prev]);
+
+    // Resetuj formularz
     setText('');
     setImages([]);
     setPreviewUrls([]);
     localStorage.removeItem('draft_text');
     setIsExpanded(false);
     setReplySetting('Everyone');
-  };
+  } catch (error: any) {
+    console.error('Błąd podczas wysyłania posta:', error.message || error);
+    alert('Nie udało się dodać posta.');
+  }
+};
 
   return (
     <div className="createPostContainer">
       <div className="createPostWrapper">
         <div className="inputSection">
-          <img src="/your-avatar.jpg" alt="avatar" className="userAvatar" />
+          <img src={profileAvatar} alt="avatar" className="userAvatar" />
           <textarea
             ref={textareaRef}
             placeholder="What's happening?"

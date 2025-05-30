@@ -1,52 +1,52 @@
-.postWrapper {
+.post {
   background-color: black;
   padding: 15px;
   border-bottom: 1px solid #2f3336;
   color: white;
 }
 
-.postHeader {
+.post .postHeader {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.userAvatar {
+.post .userAvatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
 }
 
-.userInfo {
+.post .userInfo {
   display: flex;
   flex-direction: column;
 }
 
-.userName {
+.post .userName {
   font-weight: bold;
   color: white;
 }
 
-.userName .verified {
+.post .userName .verified {
   color: #1da1f2;
   font-size: 12px;
   margin-left: 5px;
 }
 
-.userHandle {
+.post .userHandle {
   font-size: 14px;
   color: #71767b;
 }
 
-.postContent {
+.post .postContent {
   margin-top: 10px;
 }
 
-.mention {
+.post .mention {
   color: #1da1f2;
 }
 
-.postText {
+.post .postText {
   background-color: #16181c;
   padding: 10px;
   border-radius: 10px;
@@ -55,13 +55,13 @@
   margin: 10px 0;
 }
 
-.postImage {
+.post .postImage {
   width: 100%;
   border-radius: 10px;
   margin-top: 10px;
 }
 
-.postActions {
+.post .postActions {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
@@ -69,33 +69,150 @@
   font-size: 14px;
 }
 
-.action {
+.post .action {
   display: flex;
   align-items: center;
   gap: 5px;
   cursor: pointer;
 }
 
-.action:hover {
+.post .action:hover {
   color: #1da1f2;
 }
 
-.likeAction.liked {
-  color: #e0245e; 
+.post .likeAction.liked {
+  color: #e0245e;
 }
 
+.post .likeAction.liked:hover {
+  color: #e0245e;
+}
 
-.action {
+.post .commentsSection {
+  margin-top: 10px;
+  border-top: 1px solid #2f3336;
+  padding-top: 10px;
+}
+
+.post .comment {
+  padding: 5px 0;
+  border-bottom: 1px solid #2f3336;
+}
+
+.post .addComment {
   display: flex;
-  align-items: center;
-  gap: 5px;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.post .addComment input {
+  flex: 1;
+  padding: 8px;
+  background-color: #16181c;
+  border: 1px solid #2f3336;
+  color: white;
+  border-radius: 5px;
+}
+
+.post .addComment button {
+  background-color: #1da1f2;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.action:hover {
+.post .editActions {
+  margin-left: auto;
+}
+
+.post .clickableIcon {
+  cursor: pointer;
+}
+
+.post .editTextarea {
+  width: 100%;
+  padding: 10px;
+  background-color: #16181c;
+  border: 1px solid #2f3336;
+  border-radius: 10px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+/* === Nowe style dla ikon edycji i usuwania === */
+.post .commentActions {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  color: #71767b;
+}
+
+.post .commentActions .clickableIcon {
+  cursor: pointer;
+}
+
+.post .commentActions .clickableIcon:hover {
   color: #1da1f2;
 }
 
-.likeAction.liked:hover {
-  color: #e0245e; /* Czerwone zostaje */
+/* === Styl edytowanego komentarza === */
+.post .editCommentInput {
+  width: 100%;
+  padding: 8px;
+  background-color: #16181c;
+  border: 1px solid #2f3336;
+  border-radius: 5px;
+  color: white;
+  margin-top: 5px;
+}
+
+.post .commentEditButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.post .commentEditButtons button {
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+}
+
+.post .commentEditButtons .saveBtn {
+  background-color: #1da1f2;
+  color: white;
+}
+
+.post .commentEditButtons .cancelBtn {
+  background-color: #2f3336;
+  color: white;
+}
+
+/* === Przycisk zapisu edytowanego posta === */
+.post .editPostButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.post .editPostButtons button {
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+}
+
+.post .editPostButtons .saveBtn {
+  background-color: #1da1f2;
+  color: white;
+}
+
+.post .editPostButtons .cancelBtn {
+  background-color: #2f3336;
+  color: white;
 }

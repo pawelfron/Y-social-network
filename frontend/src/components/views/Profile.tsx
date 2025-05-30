@@ -9,6 +9,9 @@ import { AuthService } from "../../services/authService";
 import UserList from "../rightSection/UserList";
 import { useUser } from "../../contexts/UserContext";
 import ImageUploader from "../ImageUploader/ImageUploader";
+import { PostService } from "../../services/postService";
+import { PostDetails, PostSummary } from "../../interfaces/post";
+import PostList from "../Post/PostList";
 
 interface ProfileProps {
   onOpenModal: (content: React.ReactNode) => void;
@@ -21,6 +24,20 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
   const { user: currentUser, refreshUser } = useUser();
   const currentUserId = currentUser?.id;
 
+  const [posts, setPosts] = useState<PostDetails[]>([]);
+
+  useEffect(() => {
+    const fetchUserPosts = async () => {
+      try {
+        const userPosts = await PostService.getUserPosts(parsedUserId!);
+        setPosts(userPosts);
+      } catch (error) {
+        console.error('Failed to fetch user posts:', error);
+      }
+    };
+
+    fetchUserPosts();
+  }, [parsedUserId]);
 
   const [user, setUser] = useState<UserDetails | null>(null);
   const [loading, setLoading] = useState(true);
@@ -129,6 +146,7 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
   const showFollowButton = parsedUserId !== currentUserId && !isEditing;
 
   return (
+    <>
     <div className="profile-container">
       <div className="profile-header">
         <img
@@ -222,7 +240,10 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
           {followLoading ? "..." : isFollowing ? "Unfollow" : "Follow"}
         </button>
       )}
+      
     </div>
+    <PostList posts={posts}></PostList>
+    </>
   );
 };
 
