@@ -6,10 +6,10 @@ const Explore = () => {
   return (
     <>
         <div className='title'> Explore </div>
-        <SearchBar />
+        {/* <SearchBar />
         <Post />
         <Post />
-        <Post />
+        <Post /> */}
     </>
 
 

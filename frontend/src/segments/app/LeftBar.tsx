@@ -2,11 +2,16 @@ import { Home, Search, Bell, Bookmark, User, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./LeftBar.css";
 import logo from "../../assets/Ylogo.jpg";
+import { AuthService } from "../../services/authService";
 
 function LeftBar() {
   const addPost = () => {
     alert("POST");
   };
+
+  const authService = AuthService.get_instance();
+  const currentUserId = authService.getUserId();
+
   return (
     <div className="leftbar">
       <img src={logo} alt="Logo" className="logo" />
@@ -27,7 +32,7 @@ function LeftBar() {
           <Bookmark size={20} />
           <span>Bookmarks</span>
         </Link>
-        <Link to="/profile" className="leftbar-link">
+        <Link to={`/profile/${currentUserId}`} className="leftbar-link">
           <User size={20} />
           <span>Profile</span>
         </Link>

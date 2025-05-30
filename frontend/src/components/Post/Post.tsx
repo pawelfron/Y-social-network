@@ -14,6 +14,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
   const toggleLike = () => {
     setLiked(!liked);
     setLikes(prev => prev + (liked ? -1 : 1));
+    setLikes(prev => prev + (liked ? -1 : 1));
   };
 
   return (

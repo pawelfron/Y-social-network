@@ -10,7 +10,9 @@ const MainContent = () => {
       <Tabs />
       <CreatePost />
       <div className="postsFeed">
-        <PostList context="home" /> 
+        {/* <Post />
+        <Post />
+        <Post /> */}
       </div>
     </div>
   );
