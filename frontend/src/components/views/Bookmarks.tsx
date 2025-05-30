@@ -5,8 +5,8 @@ const Bookmarks = () => {
   return (
     <>
         <div className='title'>Bookmarks</div>
-        <Post/>
-        <Post/>
+        {/* <Post/> */}
+        {/* <Post/> */}
     </>
 
   )

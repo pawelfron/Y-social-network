@@ -9,7 +9,10 @@ export const PostService ={
     },
 
     async getUserPosts(userId: number) : Promise<PostDetails[]> {
-        const res = await axiosInstance.get(`/posts/${userId}`);
+        console.log(`/posts`);
+        const res = await axiosInstance.get(`/posts`, {
+        params: { userId }
+    });
         return res.data;
     },
 

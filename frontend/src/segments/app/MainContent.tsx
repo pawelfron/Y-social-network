@@ -10,9 +10,9 @@ const MainContent = () => {
       <Tabs/>
       <CreatePost />
       <div className="postsFeed">
+        {/* <Post />
         <Post />
-        <Post />
-        <Post />
+        <Post /> */}
       </div>
     </div>
   );
