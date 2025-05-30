@@ -22,7 +22,7 @@ export interface PostDetails extends PostSummary {
 
 export interface PostCreateData {
   content: string;
-  image?: string;
+  image?: string | File;
 }
 
 export interface PostUpdateData {

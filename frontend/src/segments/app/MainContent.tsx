@@ -1,18 +1,16 @@
 import React from 'react';
 import CreatePost from '../../components/Post/CreatePost.tsx';
-import Post from '../../components/Post/Post.tsx';
+import PostList from '../../components/Post/PostList.tsx'; // ZMIANA
 import './MainContent.css';
 import Tabs from '../../components/views/explore/Tabs.tsx';
 
 const MainContent = () => {
   return (
     <div className="mainContentWrapper">
-      <Tabs/>
+      <Tabs />
       <CreatePost />
       <div className="postsFeed">
-        <Post />
-        <Post />
-        <Post />
+        <PostList context="home" /> 
       </div>
     </div>
   );
