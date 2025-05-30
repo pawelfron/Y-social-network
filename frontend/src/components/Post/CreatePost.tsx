@@ -4,6 +4,8 @@ import { Image, Smile, CalendarClock, MapPin, CircleOff, AlignLeft, X, Globe2, U
 import EmojiPicker, { Theme } from 'emoji-picker-react';
 import './CreatePost.css';
 import { PostService } from '../../services/postService';
+import profileAvatar from "../../assets/default-avatar.jpg";
+
 
 interface Post {
   id: number;
@@ -90,7 +92,7 @@ const CreatePost = () => {
     <div className="createPostContainer">
       <div className="createPostWrapper">
         <div className="inputSection">
-          <img src="/your-avatar.jpg" alt="avatar" className="userAvatar" />
+          <img src={profileAvatar} alt="avatar" className="userAvatar" />
           <textarea
             ref={textareaRef}
             placeholder="What's happening?"

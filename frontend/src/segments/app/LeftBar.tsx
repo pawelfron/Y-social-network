@@ -3,10 +3,16 @@ import { Link } from "react-router-dom";
 import "./LeftBar.css";
 import logo from "../../assets/Ylogo.jpg";
 import { AuthService } from "../../services/authService";
+import CreatePost from "../../components/Post/CreatePost";
 
-function LeftBar() {
+interface ProfileProps {
+  onOpenModal: (content: React.ReactNode) => void;
+}
+
+
+const LeftBar : React.FC<ProfileProps> = ({ onOpenModal })=> {
   const addPost = () => {
-    alert("POST");
+    onOpenModal(<CreatePost></CreatePost>)
   };
 
   const authService = AuthService.get_instance();
@@ -24,14 +30,14 @@ function LeftBar() {
           <Search size={20} />
           <span>Explore</span>
         </Link>
-        <Link to="/notifications" className="leftbar-link">
+        {/* <Link to="/notifications" className="leftbar-link">
           <Bell size={20} />
           <span>Notifications</span>
-        </Link>
-        <Link to="/bookmarks" className="leftbar-link">
+        </Link> */}
+        {/* <Link to="/bookmarks" className="leftbar-link">
           <Bookmark size={20} />
           <span>Bookmarks</span>
-        </Link>
+        </Link> */}
         <Link to={`/profile/${currentUserId}`} className="leftbar-link">
           <User size={20} />
           <span>Profile</span>
