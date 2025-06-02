@@ -12,6 +12,7 @@ import ImageUploader from "../ImageUploader/ImageUploader";
 import { PostService } from "../../services/postService";
 import { PostDetails, PostSummary } from "../../interfaces/post";
 import PostList from "../Post/PostList";
+import { usePosts } from "../../contexts/PostsListContext";
 
 interface ProfileProps {
   onOpenModal: (content: React.ReactNode) => void;
@@ -24,20 +25,30 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
   const { user: currentUser, refreshUser } = useUser();
   const currentUserId = currentUser?.id;
 
+  const [isOwnProfile, setIsOwnProfile] = useState<boolean>(currentUserId === parsedUserId);
+
+  const {ownPosts, isLoaded} = usePosts();
+
   const [posts, setPosts] = useState<PostDetails[]>([]);
 
   useEffect(() => {
     const fetchUserPosts = async () => {
       try {
-        const userPosts = await PostService.getUserPosts(parsedUserId!);
-        setPosts(userPosts);
+        if (isOwnProfile){
+          if(!isLoaded) return;
+          setPosts(ownPosts);
+        } else {
+          const userPosts = await PostService.getUserPosts(parsedUserId!);
+          setPosts(userPosts);
+        }
       } catch (error) {
         console.error('Failed to fetch user posts:', error);
       }
     };
 
     fetchUserPosts();
-  }, [parsedUserId]);
+  }, [parsedUserId, ownPosts, isLoaded]);
+
 
   const [user, setUser] = useState<UserDetails | null>(null);
   const [loading, setLoading] = useState(true);

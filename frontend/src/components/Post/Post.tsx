@@ -10,6 +10,7 @@ import { PostService } from '../../services/postService';
 import { CommentsService } from '../../services/commentsService';
 import { AuthService } from '../../services/authService';
 import profileAvatar from "../../assets/default-avatar.jpg";
+import { usePosts } from '../../contexts/PostsListContext';
 
 
 interface PostProps {
@@ -30,6 +31,8 @@ const Post: React.FC<PostProps> = ({ post }) => {
   const [editedContent, setEditedContent] = useState(post.content);
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [editedCommentContent, setEditedCommentContent] = useState('');
+
+  const {refreshPosts} = usePosts();
 
   const authService = AuthService.get_instance();
   const currentUserId = authService.getUserId();
@@ -82,8 +85,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
   const handleDeletePost = async () => {
   try {
     await PostService.deletePost(post.id);
-    // Można też dodać callback do rodzica, żeby usunął post z listy
-    window.location.reload(); // tymczasowo odświeżenie
+    refreshPosts();
   } catch (err) {
     console.error("Failed to delete post", err);
   }

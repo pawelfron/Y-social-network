@@ -5,6 +5,7 @@ import EmojiPicker, { Theme } from 'emoji-picker-react';
 import './CreatePost.css';
 import { PostService } from '../../services/postService';
 import profileAvatar from "../../assets/default-avatar.jpg";
+import { usePosts } from '../../contexts/PostsListContext';
 
 
 interface Post {
@@ -18,7 +19,6 @@ const CreatePost = () => {
   const [text, setText] = useState('');
   const [images, setImages] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
-  const [posts, setPosts] = useState<Post[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [showReplyOptions, setShowReplyOptions] = useState(false);
@@ -26,6 +26,8 @@ const CreatePost = () => {
   const emojiRef = useRef<HTMLDivElement>(null);
   const replyRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const {refreshPosts} = usePosts();
 
   useEffect(() => {
     const savedText = localStorage.getItem('draft_text');
@@ -69,11 +71,12 @@ const CreatePost = () => {
   if (!text.trim() && images.length === 0) return;
 
   try {
-    await PostService.createPost({
+    const response = await PostService.createPost({
       content: text,
       image: images[0]// tylko jeden obrazek obsługiwany przez backend
     });
 
+    refreshPosts();
 
     // Resetuj formularz
     setText('');
