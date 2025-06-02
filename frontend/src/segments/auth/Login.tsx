@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Ylogo from "../../assets/Ylogo.jpg";
 import "./Login.css";
 import { AuthService } from "../../services/authService";
+import { useUser } from "../../contexts/UserContext";
 
 interface LoginProps {
   onLogin: () => void;
@@ -15,6 +16,7 @@ const Login:React.FC<LoginProps> = ({onLogin}) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const authService = AuthService.get_instance()
+  const {refreshUser} = useUser();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ const Login:React.FC<LoginProps> = ({onLogin}) => {
     try {
       await authService.login(username, password);
       onLogin();
+      refreshUser();
       navigate("/");
     } catch (err: any) {
       setError("Login failed");

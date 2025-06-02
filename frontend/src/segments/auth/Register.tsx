@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Ylogo from "../../assets/Ylogo.jpg";
 import "./Register.css";
 import { AuthService } from "../../services/authService";
+import { useUser } from "../../contexts/UserContext";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -13,6 +14,9 @@ const Register = () => {
   const [error, setError] = useState<string | null>(null);
   const authService = AuthService.get_instance()
 
+  const {refreshUser} = useUser();
+  
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -21,6 +25,7 @@ const Register = () => {
     try {
       await authService.register(username, email, password);
       await authService.login(username, password);
+      refreshUser();
       navigate('/');
       //const userId = authService.getUserId();
       //userService.editUser(userId, )

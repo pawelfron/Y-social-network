@@ -6,6 +6,7 @@ import profileAvatar from "../../assets/default-avatar.jpg";
 import { AuthService } from "../../services/authService";
 import { UserService } from "../../services/userService";
 import { UserDetails } from "../../interfaces/user";
+import { useUser } from "../../contexts/UserContext";
 
 interface LogoutProps {
   onLogout: () => void;
@@ -17,24 +18,26 @@ const CurrentUser: React.FC<LogoutProps> = ({ onLogout }) => {
   const navigate = useNavigate();
   const authService = AuthService.get_instance();
 
-  const [currentUser, setCurrentUser] = useState<UserDetails | null>(null);
+  //const [currentUser, setCurrentUser] = useState<UserDetails | null>(null);
 
-  // Fetch user once
-  useEffect(() => {
-    const fetchCurrentUser = async () => {
-      const currentUserId = authService.getUserId();
-      if (!currentUserId) return;
+  const {user} = useUser();
 
-      try {
-        const user = await UserService.getUser(currentUserId);
-        setCurrentUser(user);
-      } catch (err) {
-        console.error("Błąd pobierania aktualnego użytkownika:", err);
-      }
-    };
+  // // Fetch user once
+  // useEffect(() => {
+  //   const fetchCurrentUser = async () => {
+  //     const currentUserId = authService.getUserId();
+  //     if (!currentUserId) return;
 
-    fetchCurrentUser();
-  }, [authService]);
+  //     try {
+  //       const user = await UserService.getUser(currentUserId);
+  //       setCurrentUser(user);
+  //     } catch (err) {
+  //       console.error("Błąd pobierania aktualnego użytkownika:", err);
+  //     }
+  //   };
+
+  //   fetchCurrentUser();
+  // }, [authService]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -72,7 +75,7 @@ const CurrentUser: React.FC<LogoutProps> = ({ onLogout }) => {
 
 
   // Early return while loading
-  if (!currentUser) {
+  if (!user) {
     return (
       <div className="user-profile-placeholder">
         <img
@@ -89,7 +92,7 @@ const CurrentUser: React.FC<LogoutProps> = ({ onLogout }) => {
     <div className="user-profile" ref={menuRef}>
       <div className="user-info">
         <img
-          src={currentUser.profile_photo || profileAvatar}
+          src={user?.profile_photo || profileAvatar}
           alt="User Avatar"
           className="user-avatar"
           onClick={() => {
@@ -103,8 +106,8 @@ const CurrentUser: React.FC<LogoutProps> = ({ onLogout }) => {
         />
 
         <div>
-          <h3 className="user-name">{currentUser.first_name}</h3>
-          <p className="user-username">@{currentUser.username}</p>
+          <h3 className="user-name">{user.first_name}</h3>
+          <p className="user-username">@{user.username}</p>
         </div>
       </div>
       <button onClick={toggleMenu} className="logout-btn">

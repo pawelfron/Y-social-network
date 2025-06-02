@@ -8,10 +8,11 @@ import { UserDetails } from "../../interfaces/user";
 import { AuthService } from "../../services/authService";
 import UserList from "../rightSection/UserList";
 import { useUser } from "../../contexts/UserContext";
-import ImageUploader from "../ImageUploader/ImageUploader";
+import ImageUploader, { uploadedFile } from "../ImageUploader/ImageUploader";
 import { PostService } from "../../services/postService";
 import { PostDetails, PostSummary } from "../../interfaces/post";
 import PostList from "../Post/PostList";
+import { usePosts } from "../../contexts/PostsListContext";
 
 interface ProfileProps {
   onOpenModal: (content: React.ReactNode) => void;
@@ -24,20 +25,30 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
   const { user: currentUser, refreshUser } = useUser();
   const currentUserId = currentUser?.id;
 
+  const [isOwnProfile, setIsOwnProfile] = useState<boolean>(currentUserId === parsedUserId);
+
+  const {ownPosts, isLoaded, refreshPosts} = usePosts();
+
   const [posts, setPosts] = useState<PostDetails[]>([]);
 
   useEffect(() => {
     const fetchUserPosts = async () => {
       try {
-        const userPosts = await PostService.getUserPosts(parsedUserId!);
-        setPosts(userPosts);
+        if (isOwnProfile){
+          if(!isLoaded) return;
+          setPosts(ownPosts);
+        } else {
+          const userPosts = await PostService.getUserPosts(parsedUserId!);
+          setPosts(userPosts);
+        }
       } catch (error) {
         console.error('Failed to fetch user posts:', error);
       }
     };
 
     fetchUserPosts();
-  }, [parsedUserId]);
+  }, [parsedUserId, ownPosts, isLoaded]);
+
 
   const [user, setUser] = useState<UserDetails | null>(null);
   const [loading, setLoading] = useState(true);
@@ -47,7 +58,7 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
 
   const [editedFirstName, setEditedFirstName] = useState("");
   const [editedLastName, setEditedLastName] = useState("");
-  const [editedPhoto, setEditedPhoto] = useState("");
+  const [editedPhoto, setEditedPhoto] = useState<uploadedFile | null>(null);
   const [editedBio, setEditedBio] = useState("");
   const [isFollowing, setIsFollowing] = useState(false);
   const [followLoading, setFollowLoading] = useState(false);
@@ -79,7 +90,7 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
     if (user) {
       setEditedFirstName(user.first_name || "");
       setEditedLastName(user.last_name || "");
-      setEditedPhoto(user.profile_photo || "");
+      //setEditedPhoto(user.profile_photo || null);
       setEditedBio(user.profile_description || "");
       setIsEditing(true);
     }
@@ -93,22 +104,24 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
         username: user.username,
         first_name: editedFirstName,
         last_name: editedLastName,
-        profile_photo: editedPhoto,
         profile_description: editedBio,
       };
+      
+      const dataToSend = {...updateData, profile_photo: editedPhoto?.file}
+      const dataToUpdateUser = {...updateData, profile_photo: editedPhoto?.fileStr}
 
-      await UserService.editUser(user.id, updateData);
+      await UserService.editUser(user.id, dataToSend);
       setUser((prev) =>
         prev
           ? {
               ...prev,
-              ...updateData,
+              ...dataToUpdateUser,
             }
           : prev
       );
-      if (user.id === currentUserId) {
-        await refreshUser(); 
-      }
+      
+      refreshUser();
+      refreshPosts();      
       setIsEditing(false);
 
     } catch (err) {
@@ -181,7 +194,7 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
                 <ImageUploader onImageSelect={setEditedPhoto} />
                 {editedPhoto && (
                   <img
-                    src={editedPhoto}
+                    src={editedPhoto.fileStr}
                     alt="Preview"
                     style={{ maxWidth: "200px", borderRadius: "8px", marginTop: "10px" }}
                   />
