@@ -7,9 +7,9 @@
     border-radius: 10px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
-    width: 80%; 
+    width: 100%; 
     max-width: 400px;
-    min-width: 300px;
+    min-width: 150px;
   }
   
 .cardWrapper img {
@@ -39,6 +39,7 @@ border-radius: 20px;
 cursor: pointer;
 font-size: 14px;
 transition: background-color 0.3s ease;
-width: 80px; 
+width: 30%; 
+
 }
   
