@@ -6,6 +6,7 @@ import './CreatePost.css';
 import { PostService } from '../../services/postService';
 import profileAvatar from "../../assets/default-avatar.jpg";
 import { usePosts } from '../../contexts/PostsListContext';
+import { useUser } from '../../contexts/UserContext';
 
 
 interface Post {
@@ -28,6 +29,7 @@ const CreatePost = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const {refreshPosts} = usePosts();
+  const {user} = useUser();
 
   useEffect(() => {
     const savedText = localStorage.getItem('draft_text');
@@ -95,7 +97,7 @@ const CreatePost = () => {
     <div className="createPostContainer">
       <div className="createPostWrapper">
         <div className="inputSection">
-          <img src={profileAvatar} alt="avatar" className="userAvatar" />
+          <img src={user?.profile_photo || profileAvatar} alt="avatar" className="userAvatar" />
           <textarea
             ref={textareaRef}
             placeholder="What's happening?"

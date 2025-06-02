@@ -27,7 +27,7 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
 
   const [isOwnProfile, setIsOwnProfile] = useState<boolean>(currentUserId === parsedUserId);
 
-  const {ownPosts, isLoaded} = usePosts();
+  const {ownPosts, isLoaded, refreshPosts} = usePosts();
 
   const [posts, setPosts] = useState<PostDetails[]>([]);
 
@@ -119,9 +119,9 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
             }
           : prev
       );
-      if (user.id === currentUserId) {
-        await refreshUser(); 
-      }
+      
+      refreshUser();
+      refreshPosts();      
       setIsEditing(false);
 
     } catch (err) {
