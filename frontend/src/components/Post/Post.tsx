@@ -10,6 +10,8 @@ import { PostService } from '../../services/postService';
 import { CommentsService } from '../../services/commentsService';
 import { AuthService } from '../../services/authService';
 import profileAvatar from "../../assets/default-avatar.jpg";
+import { usePosts } from '../../contexts/PostsListContext';
+import { useUser } from '../../contexts/UserContext';
 
 
 interface PostProps {
@@ -17,12 +19,9 @@ interface PostProps {
 }
 
 const Post: React.FC<PostProps> = ({ post }) => {
-  console.log(post);
-  const [liked, setLiked] = useState(
-    Array.isArray(post.likes) && post.author?.id
-      ? post.likes.includes(post.author.id)
-      : false
-  );
+  
+  const [liked, setLiked] = useState(false);
+
   const [likes, setLikes] = useState(post.likes_count);
   const [comments, setComments] = useState<Comment[]>([]);
   const [showComments, setShowComments] = useState(false);
@@ -32,8 +31,20 @@ const Post: React.FC<PostProps> = ({ post }) => {
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [editedCommentContent, setEditedCommentContent] = useState('');
 
-  const authService = AuthService.get_instance();
-  const currentUserId = authService.getUserId();
+  const {refreshPosts} = usePosts();
+  const {user, loading} = useUser();
+
+  useEffect(() => {
+    console.log("POST LIKES:", post.likes);
+    console.log("USER ID:", user?.id);
+
+    if (loading) return;
+    if (Array.isArray(post.likes) && user!.id) {
+      setLiked(post.likes.includes(user!.id));
+    }
+}, [post.likes, user, loading]);
+
+
   useEffect(() => {
     if (showComments) {
       CommentsService.getPostComments(post.id).then(setComments);
@@ -83,8 +94,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
   const handleDeletePost = async () => {
   try {
     await PostService.deletePost(post.id);
-    // Można też dodać callback do rodzica, żeby usunął post z listy
-    window.location.reload(); // tymczasowo odświeżenie
+    refreshPosts();
   } catch (err) {
     console.error("Failed to delete post", err);
   }
@@ -216,7 +226,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
               ) : (
                 <>
                   <span> {comment.content}</span>
-                  {comment.author.id === currentUserId && (
+                  {comment.author.id === user?.id && (
                     <div className="commentActions">
                       <Pencil
                         size={14}
