@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status, filters, generics
 from django.shortcuts import get_object_or_404
@@ -16,6 +17,7 @@ from ..serializers.post_serializers import (
 class PostListCreateView(APIView):
     """View to create a new post and get all posts"""
     permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
 
     def get(self, request):
         only_followed = request.query_params.get('onlyFollowed') == 'true'
