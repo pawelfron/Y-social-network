@@ -1,4 +1,5 @@
 from rest_framework import generics, status, permissions, filters
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.views import APIView
@@ -21,6 +22,7 @@ class UserProfileView(generics.RetrieveAPIView):
 class UserUpdateView(generics.UpdateAPIView):
     """View to update a user's profile"""
     serializer_class = UserUpdateSerializer
+    parser_classes = [MultiPartParser, FormParser]
     queryset = User.objects.all()
     lookup_url_kwarg = 'user_id'
     

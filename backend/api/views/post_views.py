@@ -45,6 +45,7 @@ class PostListCreateView(APIView):
 
 class PostDetailEditDeleteView(APIView):
     permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
 
     def get_object(self, postId):
         return get_object_or_404(Post, pk=postId)
