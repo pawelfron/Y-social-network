@@ -19,8 +19,9 @@ interface PostProps {
 }
 
 const Post: React.FC<PostProps> = ({ post }) => {
-
+  
   const [liked, setLiked] = useState(false);
+
   const [likes, setLikes] = useState(post.likes_count);
   const [comments, setComments] = useState<Comment[]>([]);
   const [showComments, setShowComments] = useState(false);
@@ -122,7 +123,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
     <div className="post">
       <div className="postHeader">
         <img
-          src={post.author.profile_photo || profileAvatar}
+          src={'http://localhost:8000' + post.author.profile_photo || profileAvatar}
           alt="avatar"
           className="userAvatar"
         />

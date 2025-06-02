@@ -1,7 +1,7 @@
 export interface UserSummary {
   id: number;
   username: string;
-  profile_photo: string; 
+  profile_photo?: string; 
   followers_count: number;
   following_count: number;
 }
@@ -19,7 +19,7 @@ export interface UserEditData {
   username: string;
   first_name?: string;
   last_name?: string;
-  profile_photo?: string;
+  profile_photo?: File;
   profile_description?: string;
 }
 

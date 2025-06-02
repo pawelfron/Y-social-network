@@ -13,10 +13,30 @@ export const UserService = {
   },
 
   async editUser(id: number, data: UserEditData): Promise<UserEditData> {
-    console.log("Sending edit request:", { id, data });
-    const res = await axiosInstance.put(`/users/${id}/edit`, data);
-    return res.data;
-  },
+  console.log("Sending edit request:", { id, data });
+
+  const formData = new FormData();
+
+  Object.entries(data).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      if (key === "profile_photo"){
+        formData.append(key, value as File);
+      } else {
+        formData.append(key, value as string);
+      }
+      
+    }
+  });
+
+  const res = await axiosInstance.put(`/users/${id}/edit`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+
+  return res.data;
+}
+,
 
   async followUser(id: number): Promise<FollowManageData> {
     const res = await axiosInstance.post(`/users/${id}/follow`);
