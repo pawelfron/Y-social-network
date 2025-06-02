@@ -17,6 +17,7 @@ interface PostProps {
 }
 
 const Post: React.FC<PostProps> = ({ post }) => {
+  console.log(post);
   const [liked, setLiked] = useState(
     Array.isArray(post.likes) && post.author?.id
       ? post.likes.includes(post.author.id)
@@ -112,7 +113,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
     <div className="post">
       <div className="postHeader">
         <img
-          src={post.author.profile_photo || profileAvatar}
+          src={'http://localhost:8000' + post.author.profile_photo || profileAvatar}
           alt="avatar"
           className="userAvatar"
         />
