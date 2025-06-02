@@ -60,6 +60,17 @@ const CurrentUser: React.FC<LogoutProps> = ({ onLogout }) => {
     navigate("/login");
   };
 
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth < 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth < 1024);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+
   // Early return while loading
   if (!currentUser) {
     return (
@@ -81,11 +92,16 @@ const CurrentUser: React.FC<LogoutProps> = ({ onLogout }) => {
           src={currentUser.profile_photo || profileAvatar}
           alt="User Avatar"
           className="user-avatar"
+          onClick={() => {
+            if (isMobileView) toggleMenu();
+          }}
           onError={(e) => {
             e.currentTarget.onerror = null;
             e.currentTarget.src = profileAvatar;
           }}
+          style={{ cursor: isMobileView ? "pointer" : "default" }}
         />
+
         <div>
           <h3 className="user-name">{currentUser.first_name}</h3>
           <p className="user-username">@{currentUser.username}</p>
@@ -100,9 +116,12 @@ const CurrentUser: React.FC<LogoutProps> = ({ onLogout }) => {
           <button onClick={handleLogout} className="dropdown-item">
             Log out
           </button>
-          <button onClick={goToSettings} className="dropdown-item">
-            Settings
-          </button>
+          {!isMobileView && (
+            <button onClick={goToSettings} className="dropdown-item">
+              Settings
+            </button>
+          )}
+
         </div>
       )}
     </div>

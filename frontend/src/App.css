@@ -1,19 +1,21 @@
 .appContainer {
   display: flex;
-  justify-content: center; /* Wyśrodkowanie całości */
-  max-width: 1400px;
-  margin: 0 auto; /* Środek strony */
+  justify-content: center;
+  /* max-width: 1400px; */
+  margin: 0 auto;
+  padding: 0 10px;
 }
 
 .mainLayout {
-  display: flex; /* To ustawia sekcje obok siebie */
-  width: 100%; /* Zajmuje całą szerokość kontenera */
+  display: flex;
+  width: 100%;
 }
 
+/* Sekcja lewa */
 .leftSection {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* menu góra, user dół */
+  justify-content: space-between;
   width: 20%;
   min-width: 300px;
   height: 100vh;
@@ -23,19 +25,54 @@
   padding: 10px;
 }
 
+/* Główna treść */
 .mainContent {
-  width: 40%;
-  height: 100vh; /* Ustawiamy wysokość na 100vh, aby miała wysokość okna */
+  width: 60%;
+  height: 100vh;
   padding: 20px;
   border-right: 1px solid #505050;
-  overflow-y: auto; /* Umożliwia przewijanie tylko tej sekcji */
+  overflow-y: auto;
 }
 
+/* Sekcja prawa */
 .rightMenu {
-  width: 30%;
-  height: 100vh; /* Ustawiamy wysokość na 100vh, aby miała wysokość okna */
+  width: 20%;
   min-width: 250px;
-  padding: 20px;
+  height: 100vh;
+  padding: 10px 0px 10px 20px;
   position: sticky;
   top: 0;
 }
+
+/* === RESPONSYWNOŚĆ === */
+@media (max-width: 1024px) {
+  .mainLayout {
+    flex-direction: column;
+  }
+
+  .leftSection,
+  .mainContent,
+  .rightMenu {
+    position: static;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #505050;
+  }
+
+  .leftSection {
+    min-width: auto;
+    padding-bottom: 20px;
+    flex-direction: row;
+  }
+
+  .mainContent {
+    overflow-y: visible;
+  }
+}
+
+/* @media (max-width: 700px) {
+  .leftSection{
+    flex-direction: row-reverse;
+  }
+} */

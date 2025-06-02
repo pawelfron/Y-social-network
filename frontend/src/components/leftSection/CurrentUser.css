@@ -1,11 +1,12 @@
 .user-profile {
-  background-color: black; /* Kolor tła */
-  color: white; /* Kolor tekstu */
+  background-color: black;
+  color: white;
   padding: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative; /* Umożliwia pozycjonowanie elementów wewnętrznych */
+  position: relative;
+  flex-wrap: wrap;
 }
 
 .user-info {
@@ -16,10 +17,10 @@
 }
 
 .user-avatar {
-  width: 48px; /* Szerokość zdjęcia */
-  height: 48px; /* Wysokość zdjęcia */
-  border-radius: 50%; /* Okrągłe zdjęcie */
-  margin-right: 12px; /* Odstęp między zdjęciem a tekstem */
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 12px;
 }
 
 .user-name {
@@ -29,23 +30,22 @@
 
 .user-username {
   font-size: 14px;
-  color: #ccc; /* Kolor tekstu dla nazwy użytkownika */
+  color: #ccc;
 }
 
 .logout-btn {
   background: none;
   border: none;
   cursor: pointer;
-  color: white; /* Kolor przycisku */
+  color: white;
   font-size: 32px;
-  text-decoration: underline;
+  text-decoration: none;
+  margin-right: 16px;
   transition: color 0.2s ease-in-out;
-  text-decoration: none; /* Usunięcie podkreślenia */
-  margin-right: 16px; /* Odstęp od prawej krawędzi */
 }
 
 .logout-btn:hover {
-  color: #2563eb; /* Kolor przycisku po hover */
+  color: #2563eb;
 }
 
 .dropdown-menu-user {
@@ -53,11 +53,11 @@
   bottom: 60%;
   right: 0;
   background-color: #2d2d2d;
-  border-radius: 8px;
   margin-bottom: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 10px 0;
   width: 150px;
+  z-index: 10;
 }
 
 .dropdown-item {
@@ -69,9 +69,66 @@
   width: 100%;
   cursor: pointer;
   font-size: 14px;
-  text-decoration: none; /* Usunięcie podkreślenia */
+  text-decoration: none;
 }
 
 .dropdown-item:hover {
   background-color: #333;
 }
+
+@media (max-width: 1024px) {
+  .logout-btn {
+    display: none;
+  }
+ .dropdown-menu-user {
+    top: 100%;
+    padding: 0px;
+    height: fit-content;
+    left: 0;
+    right: 0;
+    width: auto; 
+  }
+
+  .dropdown-item {
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .user-username, .user-name{
+    display: none;
+  }
+}
+
+
+/* @media (max-width: 640px) {
+  .user-profile {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .user-info {
+    margin-left: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .logout-btn {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  .dropdown-menu-user {
+    right: 50%;
+    transform: translateX(50%);
+    bottom: auto;
+    top: 100%;
+    margin-top: 8px;
+  }
+} */

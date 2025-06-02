@@ -9,6 +9,7 @@
   justify-content: flex-start;
   padding: 20px;
   box-sizing: border-box;
+  position: relative;
 }
 
 .leftbar-links {
@@ -52,4 +53,95 @@
   width: 40px;
   height: 40px;
   margin-bottom: 20px;
+}
+
+/* Styl dla obecnego użytkownika */
+.current-user {
+  margin-top: auto;
+  color: #ccc;
+  font-size: 14px;
+}
+
+/* Hamburger menu - domyślnie ukryty */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+/* ======================== */
+/* ===== MEDIA QUERY ====== */
+/* ======================== */
+@media (max-width: 1024px) {
+  .leftbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: auto;
+    padding: 10px 20px;
+  }
+
+  .logo {
+    margin-bottom: 0;
+  }
+
+  .leftbar-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 0;
+  }
+
+  .leftbar-link {
+    flex: 0 1 auto;
+    justify-content: center;
+  }
+
+  .post-button {
+    display: none;
+  }
+
+  .current-user {
+    margin-top: 0;
+    margin-left: auto;
+    font-size: 14px;
+    order: 3;
+  }
+}
+
+/* === Hamburgerek dla bardzo małych ekranów === */
+@media (max-width: 700px) {
+  .leftbar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .leftbar-links {
+    display: none;
+    flex-direction: column;
+    background-color: #111;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    padding: 10px;
+    z-index: 999;
+    width: 30%;
+    background-color: #333;
+  }
+
+  .leftbar-links.open {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
 }
