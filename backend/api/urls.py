@@ -1,5 +1,7 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView
+from django.conf.urls.static import static
+from django.conf import settings
 from .views import auth_views, user_views, post_views, comment_views
 
 urlpatterns = [
@@ -33,4 +35,4 @@ urlpatterns = [
 
     # This is only for testing if authentication works; delete later
     path('useless', auth_views.UselessView.as_view(), name='test_protected_endpoint'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
