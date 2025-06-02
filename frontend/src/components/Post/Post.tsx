@@ -35,21 +35,21 @@ const Post: React.FC<PostProps> = ({ post }) => {
   const {user, loading} = useUser();
 
   useEffect(() => {
-    console.log("POST LIKES:", post.likes);
-    console.log("USER ID:", user?.id);
 
     if (loading) return;
     if (Array.isArray(post.likes) && user!.id) {
       setLiked(post.likes.includes(user!.id));
     }
-}, [post.likes, user, loading]);
+    
+    console.log(`is liked: ${liked}`)
+
+}, [post.likes_count, user, loading]);
 
 
-  useEffect(() => {
-    if (showComments) {
-      CommentsService.getPostComments(post.id).then(setComments);
-    }
-  }, [showComments]);
+useEffect(() => {
+  CommentsService.getPostComments(post.id).then(setComments);
+}, [post.id]);
+
 
   const toggleLike = async () => {
     try {
@@ -177,7 +177,8 @@ const Post: React.FC<PostProps> = ({ post }) => {
 
       <div className="postActions">
         <div className="action" onClick={() => setShowComments(!showComments)}>
-          <MessageCircle size={16} /> {comments.length}
+          <MessageCircle size={16} />
+          {comments.length}
         </div>
         <div className="action"><Repeat size={16} /> 0</div>
         <div
