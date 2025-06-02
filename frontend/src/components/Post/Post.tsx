@@ -171,7 +171,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
           <p className="postText">{post.content}</p>
         )}
         {post.image && (
-          <img src={post.image} alt="Post" className="postImage" />
+          <img src={'http://localhost:8000/' + post.image} alt="Post" className="postImage" />
         )}
       </div>
 

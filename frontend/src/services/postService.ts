@@ -15,12 +15,48 @@ export const PostService ={
 ,
 
     async createPost(postData: PostCreateData) : Promise<PostInfo> {
-        const res = await axiosInstance.post(`/posts`, postData);
+          const formData = new FormData();
+
+        Object.entries(postData).forEach(([key, value]) => {
+            if (value !== undefined && value !== null) {
+            if (key === "image"){
+                formData.append(key, value as File);
+            } else {
+                formData.append(key, value as string);
+            }
+            
+            }
+        });
+
+        const res = await axiosInstance.post(`/posts`, formData, {
+            headers: {
+            'Content-Type': 'multipart/form-data'
+            }
+        });
+
         return res.data;
     },
 
     async updatePost(id: number, postData: PostUpdateData) : Promise<PostInfo> {
-        const res = await axiosInstance.put(`/posts/${id}`, postData);
+        const formData = new FormData();
+
+        Object.entries(postData).forEach(([key, value]) => {
+            if (value !== undefined && value !== null) {
+            if (key === "image"){
+                formData.append(key, value as File);
+            } else {
+                formData.append(key, value as string);
+            }
+            
+            }
+        });
+
+        const res = await axiosInstance.put(`/posts/${id}`, formData, {
+            headers: {
+            'Content-Type': 'multipart/form-data'
+            }
+        });
+
         return res.data;
     },
 
