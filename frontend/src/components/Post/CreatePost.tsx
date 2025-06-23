@@ -7,7 +7,6 @@ import { PostService } from '../../services/postService';
 import profileAvatar from "../../assets/default-avatar.jpg";
 import { usePosts } from '../../contexts/PostsListContext';
 
-
 interface Post {
   id: number;
   text: string;
@@ -27,7 +26,7 @@ const CreatePost = () => {
   const replyRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const {refreshPosts} = usePosts();
+  const { refreshPosts } = usePosts();
 
   useEffect(() => {
     const savedText = localStorage.getItem('draft_text');
@@ -68,28 +67,27 @@ const CreatePost = () => {
   };
 
   const handlePost = async () => {
-  if (!text.trim() && images.length === 0) return;
+    if (!text.trim() && images.length === 0) return;
 
-  try {
-    const response = await PostService.createPost({
-      content: text,
-      image: images[0]// tylko jeden obrazek obsługiwany przez backend
-    });
+    try {
+      const response = await PostService.createPost({
+        content: text,
+        image: images[0] // tylko jeden obrazek obsługiwany przez backend
+      });
 
-    refreshPosts();
+      refreshPosts();
 
-    // Resetuj formularz
-    setText('');
-    setImages([]);
-    setPreviewUrls([]);
-    localStorage.removeItem('draft_text');
-    setIsExpanded(false);
-    setReplySetting('Everyone');
-  } catch (error: any) {
-    console.error('Błąd podczas wysyłania posta:', error.message || error);
-    alert('Nie udało się dodać posta.');
-  }
-};
+      setText('');
+      setImages([]);
+      setPreviewUrls([]);
+      localStorage.removeItem('draft_text');
+      setIsExpanded(false);
+      setReplySetting('Everyone');
+    } catch (error: any) {
+      console.error('Błąd podczas wysyłania posta:', error.message || error);
+      alert('Nie udało się dodać posta.');
+    }
+  };
 
   return (
     <div className="createPostContainer">
@@ -109,7 +107,6 @@ const CreatePost = () => {
 
         {isExpanded && (
           <>
-            {/* Who can reply */}
             <div className="replySettingWrapper">
               <button className="replyButton" onClick={() => setShowReplyOptions(prev => !prev)}>
                 <Globe2 size={14} /> {replySetting} can reply
@@ -135,7 +132,6 @@ const CreatePost = () => {
           </>
         )}
 
-        {/* Images */}
         {previewUrls.length > 0 && (
           <div className={`imagePreviewGrid count-${previewUrls.length}`}>
             {previewUrls.map((url, index) => (
@@ -149,14 +145,13 @@ const CreatePost = () => {
           </div>
         )}
 
-        {/* Bottom icons and post button */}
         <div className="createPostActions">
           <div className="icons">
             <label>
               <Image size={18} />
               <input type="file" accept="image/*" multiple onChange={handleImageChange} hidden />
             </label>
-            <div onClick={() => setShowEmojiPicker(prev => !prev)}>
+            <div data-testid="emoji-button" onClick={() => setShowEmojiPicker(prev => !prev)}>
               <Smile size={18} />
             </div>
             <CircleOff size={18} />
@@ -169,9 +164,8 @@ const CreatePost = () => {
           </button>
         </div>
 
-        {/* Emoji picker */}
         {showEmojiPicker && (
-          <div ref={emojiRef} className="emojiPickerContainer">
+          <div data-testid="emoji-picker" ref={emojiRef} className="emojiPickerContainer">
             <EmojiPicker
               onEmojiClick={(emojiData: any) => setText(prev => prev + emojiData.emoji)}
               theme={Theme.DARK}
