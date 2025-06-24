@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CreatePost from '../../components/Post/CreatePost.tsx';
 import PostList from '../../components/Post/PostList.tsx';
 import './MainContent.css';
@@ -18,7 +18,7 @@ const MainContent = () => {
       try {
         if (activeTab === 'forYou') {
           if (!isLoaded) return;
-          setPosts(contextPosts); // ← odświeżenie po zmianie danych z kontekstu
+          setPosts(contextPosts);
         } else {
           const followingPosts = await PostService.searchPosts(true, '');
           setPosts(followingPosts);

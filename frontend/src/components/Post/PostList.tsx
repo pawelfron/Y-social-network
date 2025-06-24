@@ -1,5 +1,5 @@
 import React from 'react';
-import { PostDetails, PostSummary } from "../../interfaces/post";
+import { PostDetails } from "../../interfaces/post";
 import Post from "./Post";
 import { AuthService } from '../../services/authService';
 

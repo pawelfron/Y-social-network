@@ -1,5 +1,3 @@
-import React from 'react'
-import Post from '../Post/Post.tsx'
 
 const Bookmarks = () => {
   return (

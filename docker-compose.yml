@@ -10,7 +10,7 @@ services:
     ports:
       - "5433:5432"
 
-  web:
+  web-api:
     build:
       context: ./backend
     command: >
@@ -26,5 +26,14 @@ services:
     depends_on:
       - db
 
+  web-app:
+    build:
+      context: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - web-api
+
 volumes:
   postgres_data:
+

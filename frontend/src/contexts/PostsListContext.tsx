@@ -1,7 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { PostDetails } from "../interfaces/post";
-import { useUser } from "./UserContext";
-import { UserService } from "../services/userService";
 import { PostService } from "../services/postService";
 import { AuthService } from "../services/authService";
 

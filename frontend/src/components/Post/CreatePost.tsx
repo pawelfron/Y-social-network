@@ -8,14 +8,6 @@ import profileAvatar from "../../assets/default-avatar.jpg";
 import { usePosts } from '../../contexts/PostsListContext';
 import { useUser } from '../../contexts/UserContext';
 
-
-interface Post {
-  id: number;
-  text: string;
-  images: string[];
-  replySetting: string;
-}
-
 const CreatePost = () => {
   const [text, setText] = useState('');
   const [images, setImages] = useState<File[]>([]);
@@ -73,14 +65,13 @@ const CreatePost = () => {
   if (!text.trim() && images.length === 0) return;
 
   try {
-    const response = await PostService.createPost({
+    await PostService.createPost({
       content: text,
-      image: images[0]// tylko jeden obrazek obsługiwany przez backend
+      image: images[0]
     });
 
     refreshPosts();
 
-    // Resetuj formularz
     setText('');
     setImages([]);
     setPreviewUrls([]);

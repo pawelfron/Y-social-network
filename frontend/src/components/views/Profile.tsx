@@ -5,12 +5,11 @@ import profileAvatar from "../../assets/default-avatar.jpg";
 import { useParams } from "react-router-dom";
 import { UserService } from "../../services/userService";
 import { UserDetails } from "../../interfaces/user";
-import { AuthService } from "../../services/authService";
 import UserList from "../rightSection/UserList";
 import { useUser } from "../../contexts/UserContext";
 import ImageUploader, { uploadedFile } from "../ImageUploader/ImageUploader";
 import { PostService } from "../../services/postService";
-import { PostDetails, PostSummary } from "../../interfaces/post";
+import { PostDetails } from "../../interfaces/post";
 import PostList from "../Post/PostList";
 import { usePosts } from "../../contexts/PostsListContext";
 
@@ -25,7 +24,7 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
   const { user: currentUser, refreshUser } = useUser();
   const currentUserId = currentUser?.id;
 
-  const [isOwnProfile, setIsOwnProfile] = useState<boolean>(currentUserId === parsedUserId);
+  const [isOwnProfile] = useState<boolean>(currentUserId === parsedUserId);
 
   const {ownPosts, isLoaded, refreshPosts} = usePosts();
 
@@ -53,8 +52,6 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
   const [user, setUser] = useState<UserDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
-  // const [followedVisible, setFollowedVisible] = useState(false);
-  // const [followingVisible, setFollowingVisible] = useState(false);
 
   const [editedFirstName, setEditedFirstName] = useState("");
   const [editedLastName, setEditedLastName] = useState("");
@@ -90,7 +87,6 @@ const Profile: React.FC<ProfileProps> = ({ onOpenModal }) => {
     if (user) {
       setEditedFirstName(user.first_name || "");
       setEditedLastName(user.last_name || "");
-      //setEditedPhoto(user.profile_photo || null);
       setEditedBio(user.profile_description || "");
       setIsEditing(true);
     }

@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Settings.css";
-import SearchBar from "../../SearchBar/SearchBar.tsx";
-import RightSettings from "./RightSettings.tsx"; // Zaimportuj komponent RightSettings
+import RightSettings from "./RightSettings.tsx";
 
 const Settings = () => {
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null); // Stan aktywnego dropdownu
-
-  // Funkcje do toggle'owania rozwijanych menu
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null); 
   const togglePersonalization = () => {
     setActiveDropdown(
       activeDropdown === "personalization" ? null : "personalization"
@@ -20,7 +17,6 @@ const Settings = () => {
   return (
     <div className="mainSettings">
       <div className="title">Settings</div>
-      <SearchBar />
       <div className="dropdown-container">
         <div className="dropdown-item" onClick={togglePersonalization}>
           Account personalization

@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LeftBar from "./segments/app/LeftBar.tsx";
 import CurrentUser from "./components/leftSection/CurrentUser.tsx";
@@ -24,10 +24,6 @@ function App() {
   const openModalWith = (content: React.ReactNode) => {
     setModalContent(content);
     setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setModalContent(null);
   };
 
   useEffect(() => {

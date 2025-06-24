@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import SearchBar from '../../SearchBar/SearchBar.tsx'
 import { PostDetails } from '../../../interfaces/post.ts';
 import { PostService } from '../../../services/postService.ts';

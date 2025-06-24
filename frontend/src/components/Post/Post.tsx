@@ -5,10 +5,9 @@ import {
 } from 'lucide-react';
 import './Post.css';
 import { PostDetails } from '../../interfaces/post';
-import { Comment, CommentCreateData, CommentWithID } from '../../interfaces/comment';
+import { Comment, CommentCreateData } from '../../interfaces/comment';
 import { PostService } from '../../services/postService';
 import { CommentsService } from '../../services/commentsService';
-import { AuthService } from '../../services/authService';
 import profileAvatar from "../../assets/default-avatar.jpg";
 import { usePosts } from '../../contexts/PostsListContext';
 import { useUser } from '../../contexts/UserContext';

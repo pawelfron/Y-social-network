@@ -1,4 +1,4 @@
-import { Home, Search, Bell, Bookmark, User, Settings } from "lucide-react";
+import { Home, Search, User, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./LeftBar.css";
 import logo from "../../assets/Ylogo.jpg";
