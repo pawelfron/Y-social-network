@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Modal from './Modal';
+import Modal from '../../../src/components/Modal/Modal';
 
 describe('Modal component', () => {
   beforeEach(() => {
@@ -22,7 +22,7 @@ describe('Modal component', () => {
   test('calls onClose when clicking outside the modal content', () => {
     const handleClose = jest.fn();
 
-    const { getByRole } = render(
+    render(
       <Modal onClose={handleClose}>
         <div role="dialog">Modal Content</div>
       </Modal>
@@ -39,7 +39,7 @@ describe('Modal component', () => {
   test('does not call onClose when clicking inside modal content', () => {
     const handleClose = jest.fn();
 
-    const { getByText } = render(
+    render(
       <Modal onClose={handleClose}>
         <div>Inside Modal</div>
       </Modal>
