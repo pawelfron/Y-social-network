@@ -1,9 +1,12 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import CurrentUser from "../CurrentUser";
+import CurrentUser from "./CurrentUser"; 
 import { MemoryRouter } from "react-router-dom";
+
+
 import * as userService from "../../../services/userService";
 import { AuthService } from "../../../services/authService";
+
 
 jest.mock("../../../services/userService");
 
@@ -22,10 +25,12 @@ const mockUser = {
 describe("<CurrentUser />", () => {
   beforeEach(() => {
     jest.clearAllMocks();
+
     jest.spyOn(AuthService, "get_instance").mockReturnValue({
       getUserId: () => 1,
       logout: jest.fn()
     });
+
     userService.UserService.getUser = jest.fn().mockResolvedValue(mockUser);
   });
 
@@ -82,3 +87,4 @@ describe("<CurrentUser />", () => {
     expect(mockLogout).toHaveBeenCalled();
   });
 });
+
