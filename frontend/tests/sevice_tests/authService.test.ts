@@ -1,4 +1,4 @@
-import { AuthService } from '../authService';
+import { AuthService } from "../../../src/services/authService";
 
 describe('AuthService', () => {
   beforeEach(() => {
