@@ -1,10 +1,10 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import Profile from "../../../src/components/views/Profile";
-import { UserProvider } from "../../../src/contexts/UserContext";
-import { PostsProvider } from "../../../src/contexts/PostsListContext";
-import * as userService from "../../../src/services/userService";
-import * as postService from "../../../src/services/postService";
+import Profile from "../../src/components/views/Profile";
+import { UserProvider } from "../../src/contexts/UserContext";
+import { PostsProvider } from "../../src/contexts/PostsListContext";
+import * as userService from "../../src/services/userService";
+import * as postService from "../../src/services/postService";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 
 jest.mock("../../../src/services/userService");

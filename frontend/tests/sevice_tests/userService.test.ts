@@ -1,13 +1,13 @@
-import { UserService } from "../../../src/services/userService";
+import { UserService } from "../../src/services/userService";
 import MockAdapter from "axios-mock-adapter";
-import { axiosInstance } from "../../../src/services/apiClient";
+import { axiosInstance } from "../../src/services/apiClient";
 import {
   UserSummary,
   UserDetails,
   UserEditData,
   FollowManageData,
   userWithDate
-} from "../../../src/interfaces/user";
+} from "../../src/interfaces/user";
 
 const mock = new MockAdapter(axiosInstance);
 const userId = 1;

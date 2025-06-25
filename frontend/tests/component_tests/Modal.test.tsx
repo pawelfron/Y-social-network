@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Modal from '../../../src/components/Modal/Modal';
+import Modal from '../../src/components/Modal/Modal';
 
 describe('Modal component', () => {
   beforeEach(() => {

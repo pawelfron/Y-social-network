@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import ImageUploader, { uploadedFile } from '../../../src/components/ImageUploader/ImageUploader';
+import ImageUploader, { uploadedFile } from '../../src/components/ImageUploader/ImageUploader';
 
 describe('ImageUploader', () => {
   it('calls onImageSelect with base64 string and file when an image is selected', async () => {

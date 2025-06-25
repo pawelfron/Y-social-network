@@ -1,10 +1,10 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import CurrentUser from "../../../src/components/leftSection/CurrentUser"; 
+import CurrentUser from "../../src/components/leftSection/CurrentUser"; 
 import { MemoryRouter } from "react-router-dom";
 
-import * as userService from "../../../src/services/userService";
-import { AuthService } from "../../../src/services/authService";
+import * as userService from "../../src/services/userService";
+import { AuthService } from "../../src/services/authService";
 
 jest.mock("../../../src/services/userService");
 

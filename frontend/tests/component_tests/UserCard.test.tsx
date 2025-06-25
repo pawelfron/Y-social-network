@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import UserCard from '../../../src/components/rightSection/UserCard';
+import UserCard from '../../src/components/rightSection/UserCard';
 import { BrowserRouter } from 'react-router-dom';
-import { UserService } from '../../../src/services/userService';
-import { AuthService } from '../../../src/services/authService';
+import { UserService } from '../../src/services/userService';
+import { AuthService } from '../../src/services/authService';
 
 jest.mock('../../../src/services/userService');
 jest.mock('../../../src/services/authService');

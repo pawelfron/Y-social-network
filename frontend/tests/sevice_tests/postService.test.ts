@@ -1,13 +1,13 @@
-import { PostService } from "../../../src/services/postService";
+import { PostService } from "../../src/services/postService";
 import MockAdapter from "axios-mock-adapter";
-import { axiosInstance } from "../../../src/services/apiClient";
+import { axiosInstance } from "../../src/services/apiClient";
 import {
   PostCreateData,
   PostDetails,
   PostInfo,
   PostSummary,
   PostUpdateData
-} from "../../../src/interfaces/post";
+} from "../../src/interfaces/post";
 
 const mock = new MockAdapter(axiosInstance);
 

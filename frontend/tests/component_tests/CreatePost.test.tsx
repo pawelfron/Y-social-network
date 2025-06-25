@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import CreatePost from '../../../src/components/Post/CreatePost';
+import CreatePost from '../../src/components/Post/CreatePost';
 
 describe('CreatePost component', () => {
   beforeEach(() => {

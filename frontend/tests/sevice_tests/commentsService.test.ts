@@ -1,12 +1,12 @@
-import { CommentsService } from "../../../src/services/commentsService";
-import { axiosInstance } from "../../../src/services/apiClient";
+import { CommentsService } from "../../src/services/commentsService";
+import { axiosInstance } from "../../src/services/apiClient";
 import MockAdapter from "axios-mock-adapter";
 import {
   Comment,
   CommentContent,
   CommentCreateData,
   CommentWithID
-} from "../../../src/interfaces/comment";
+} from "../../src/interfaces/comment";
 
 const mock = new MockAdapter(axiosInstance);
 
