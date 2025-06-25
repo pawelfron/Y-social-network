@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import SearchBar from './SearchBar';
+import SearchBar from '../../../src/components/SearchBar/SearchBar';
 
 describe('<SearchBar />', () => {
   test('renders input with placeholder', () => {
